@@ -1,0 +1,110 @@
+body {
+    background-color: #F1F1F1;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+.no-left-padding {
+    padding-left: 0;
+}
+
+.no-padding-lr {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.title {
+    color: black;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*display: block;*/
+    /*width: 100%;*/
+    /*height: 42px;*/
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    
+}
+
+.channel-title {
+    color: #767676;
+}
+
+.auto-size-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.auto-size-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.auto-size-container {
+    margin-bottom: 15px;
+}
+
+.oneline {
+    
+    -white-space: nowrap;
+    -overflow: hidden;
+    -text-overflow: ellipsis;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 2.5em;
+    line-height: 1.2;
+    }
+
+.oneline a {
+    color: black;
+}
+
+.caption p {
+    color: #767676;
+    /*margin: 0px;*/
+}
+    
+    
+    
+.thumbnail {
+  border: none;
+  margin: 0 -10px 10px;
+}
+
+@media screen and (max-width: 640px) {
+  .thumbnail .caption {padding: 0;}
+  .thumbnail .oneline {margin: 0 0 5px; font-size: 0.9em; height: 2.15em;}
+  .thumbnail .btn {font-size: 0.75em; padding: 3px;}
+}
+
+@media screen and (min-width: 990px) {
+    h3 {
+        margin: 0;
+        font-size: 1em;
+    }
+    .thumbnail .caption {
+        padding: 0;
+    }
+    
+    .homepage h3 {
+        font-size: 1.5em;
+        margin: 10px 0 0;
+    }
+}

@@ -20,7 +20,7 @@ else {
         ws: true, // Proxy websockets too
         router: {
             // Anything to /api goes to our backend
-            'localhost:8080/api': 'http://localhost:3001'
+            'localhost:8080/api': 'http://localhost:3090'
         }
     }));
     app.listen(process.env.PORT || 8080);
