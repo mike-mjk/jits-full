@@ -22,7 +22,7 @@ class Search extends React.Component {
 		      <div className="thumbnail">
 		        <div className="row">
 		          <div className="col-xs-5 col-md-12">
-		            <Link to={resultUrl}><img className="width-100" src={thumbUrl} /></Link>
+		            <Link to={resultUrl}><img alt="thumbnail" className="width-100" src={thumbUrl} /></Link>
 		          </div>
 		          <div className="col-xs-7 col-md-12">
 		            <div className="caption">

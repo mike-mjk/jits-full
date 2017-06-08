@@ -17,7 +17,7 @@ const config = require('./config');
 
 const app = express();
 //following two lines were in my original server, unclear how to integrate
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 // app.use(express.static('build'));
 
 // API endpoints go here!

@@ -16,12 +16,14 @@ class VideoList extends React.Component {
 		return (
 			_.map(videosToRender, (video) => {
 				return (
-					<div>
-						<Thumbnail videoUrl={`watch/${video.id}`} thumbnailUrl={video.thumbnail} />
+					<div key={video.id}>
+						<Thumbnail videoUrl={`/watch/${video.id}`} thumbnailUrl={video.thumbnail} />
 						<VideoText 
 							videoUrl={`watch/${video.id}`}
 							videoTitle={video.title} 
 							channelTitle={video.channelTitle}
+							addedBy={video.addedBy ? `Added By: ${video.addedBy}` : ''}
+							likes={video.likes ? `Likes: ${video.likes}` : ''}
 						/>
 					</div>
 				)

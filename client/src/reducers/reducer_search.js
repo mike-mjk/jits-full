@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { SEARCH_YOUTUBE } from '../actions';
-import { transformResults } from '../app';
+// import { transformResults } from '../app';
 
 export default function(state = {}, action) {
 	switch(action.type) {
@@ -9,7 +9,6 @@ export default function(state = {}, action) {
 		return (action.payload);
 	default:
 		return state
-
 	}
 }
 

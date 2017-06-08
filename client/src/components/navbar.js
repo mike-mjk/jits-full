@@ -19,7 +19,7 @@ class Search extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     console.log('onFormSubmit is called with this term:', this.state.term)
-    if (this.state.term != '') {
+    if (this.state.term !== '') {
       this.props.searchYoutube(this.state.term, this.props.history);
     }
   }

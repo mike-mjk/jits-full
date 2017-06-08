@@ -23,6 +23,9 @@ import RequireAuth from './components/require_auth';
 import { AUTH_USER } from './actions';
 
 import HomeList from './components/home_list';
+import SearchList from './components/search_list';
+import WatchScreen from './components/watch_screen';
+
 
 const createStoreWithMiddleware = applyMiddleware(promise, thunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -37,11 +40,11 @@ ReactDOM.render(
       <div>
         <Route path="/" component={NavBar} />
         <Switch>
-        	<Route path="/watch/:id" component={VideoWatch} />
+        	<Route path="/watch/:id" component={WatchScreen} />
           <Route path="/signin" component={Signin} />
           <Route path="/signout" component={Signout} />
           <Route path="/signup" component={Signup} />
-        	<Route path="/search" component={Search} />
+        	<Route path="/search" component={SearchList} />
           <Route path="/" component={HomeList} />
         </Switch>
       </div>

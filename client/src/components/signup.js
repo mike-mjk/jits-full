@@ -52,6 +52,12 @@ class Signup extends React.Component {
 					component={this.renderField}
 				/>
 				<Field
+					label="Display Name (This will be the name displayed to other users on all videos you submit)"
+					type="text"
+					name="displayName"
+					component={this.renderField}
+				/>
+				<Field
 					label="Password"
 					type="password"
 					name="password"
@@ -72,12 +78,14 @@ class Signup extends React.Component {
 
 function validate(values) {
 	const errors = {};
-	console.log(values);
 	if (values.username) {
 		// console.log('values.username', values.username);
 		if (values.username.length < 4) {
 			errors.username = "Username must be at least 4 characters";
 		}	
+	}
+	if (!values.displayName) {
+		errors.displayName = "Please enter a Display Name"
 	}
 	//putting password length min as 3 for dev purposes. will increase later
 	if (values.password) {

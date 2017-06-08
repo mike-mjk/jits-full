@@ -1,5 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
+import config from '../api_key';
+console.log(config.key);
 //attempting to navigate to /search 
 // import { browserHistory } from 'react-router';
 
@@ -69,7 +71,6 @@ export function fetchVideo(id) {
 
 
 export function searchYoutube(term, history) {
-	console.log('The action searchYoutube is called');
 	return function(dispatch) {
 		//Define arguments for GET request
 		const baseURL = 'https://www.googleapis.com/youtube/v3/search';
@@ -87,9 +88,9 @@ export function searchYoutube(term, history) {
 	  		var videos = response.data.items.map(result => {
 					return ({
 						title: result.snippet.title,
-			      channelTitle: result.snippet.channelTitle,
-			      id: result.id.videoId,
-			      thumbnail: result.snippet.thumbnails.medium.url
+			      	channelTitle: result.snippet.channelTitle,
+			      	id: result.id.videoId,
+			     		thumbnail: result.snippet.thumbnails.medium.url
 					})
 				})
 				//Transform array of videos into object
@@ -99,10 +100,20 @@ export function searchYoutube(term, history) {
 	  			{ type: SEARCH_YOUTUBE,
 	  				payload: videos
 	  			})
-	  		//logs to try to figure out what's going on
-	  		// console.log('videos', videos);
-	  		console.log('history.push is next line');	
 	  		history.push('/search');
 	  	})
 	}
+}
+
+export function getDataFromApi(videoId) {
+    var baseURL = 'https://www.googleapis.com/youtube/v3/videos';
+	var query = {
+		id: videoId,
+		part: 'snippet',
+		r: 'json',
+		key: 'dad'
+	};
+	// $.getJSON(baseURL, query, function(data) {
+ // 	    createVideoObject(data, addVideo);
+ // 	});
 }

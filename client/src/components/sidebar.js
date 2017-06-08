@@ -25,7 +25,7 @@ class SideBar extends React.Component {
 		   			<div className="thumbnail">
 	    				<div className="row">
 		         		<div className="col-xs-5 xcol-md-12">
-		            	<Link to={videoUrl}><img className="width-100" src={thumbUrl} /></Link>
+		            	<Link to={videoUrl}><img alt="thumbnail" className="width-100" src={thumbUrl} /></Link>
 		          	</div>
 		          	<div className="col-xs-7 xcol-md-12">
 		            	<div className="caption">

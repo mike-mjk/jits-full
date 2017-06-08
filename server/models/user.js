@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt-nodejs');
 
 const userSchema = new mongoose.Schema({
 	username: { type: String, unique: true, lowercase: true },
-	password: String
+	password: { type: String },
+	displayName: { type: String }
 });
 
 userSchema.pre('save', function(next) {
