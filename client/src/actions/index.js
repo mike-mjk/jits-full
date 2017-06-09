@@ -1,7 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import config from '../api_key';
-console.log(config.key);
+import { extractFromResponse } from '../app_stuff';
 //attempting to navigate to /search 
 // import { browserHistory } from 'react-router';
 
@@ -73,26 +73,19 @@ export function fetchVideo(id) {
 export function searchYoutube(term, history) {
 	return function(dispatch) {
 		//Define arguments for GET request
-		const baseURL = 'https://www.googleapis.com/youtube/v3/search';
+		const URL = 'https://www.googleapis.com/youtube/v3/search';
 		const query = {params: {
 	    q: term,
 	    part: 'snippet',
 	    type: 'video',
 	    maxResults: 15,
-	    key: 'AIzaSyCIdQfwZ7qDSA1BhnfzEBa-6AB8ma8YY9k'
+	    key: config.key
 	  }}
 
-	  axios.get(baseURL, query)
+	  axios.get(URL, query)
 	  	.then(response => {
 	  		//Extract needed data from API response
-	  		var videos = response.data.items.map(result => {
-					return ({
-						title: result.snippet.title,
-			      	channelTitle: result.snippet.channelTitle,
-			      	id: result.id.videoId,
-			     		thumbnail: result.snippet.thumbnails.medium.url
-					})
-				})
+	  		var videos = extractFromResponse(response)
 				//Transform array of videos into object
 	  		videos = _.mapKeys(videos, 'id');
 
@@ -105,15 +98,25 @@ export function searchYoutube(term, history) {
 	}
 }
 
-export function getDataFromApi(videoId) {
-    var baseURL = 'https://www.googleapis.com/youtube/v3/videos';
+//use id from url to make request to youtube api
+//extract relevent info, and add to the database
+export function addVideoToDatabase(videoId) {
+  var URL = 'https://www.googleapis.com/youtube/v3/videos';
 	var query = {
 		id: videoId,
 		part: 'snippet',
 		r: 'json',
-		key: 'dad'
+		key: config.key
 	};
-	// $.getJSON(baseURL, query, function(data) {
+
+	axios.get(URL, query)
+		.then(response => {
+			var video = extractFromResponse(response)
+			console.log('video', video)
+
+		})
+
+	// $.getJSON(URL, query, function(data) {
  // 	    createVideoObject(data, addVideo);
  // 	});
 }

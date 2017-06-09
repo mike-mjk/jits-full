@@ -45,7 +45,11 @@ app.post('/api/videos', function(req, res){
         channelTitle: req.body.channelTitle,
         thumbnail: req.body.thumbnail,
         description: req.body.description,
-        tags: req.body.tags
+        tags: req.body.tags,
+        // addedBy: req.body.addedBy,
+        // likes: 0,
+        // category: req.body.category
+
     }, function(err, video) {
         if (err) {
             return res.status(500).json({

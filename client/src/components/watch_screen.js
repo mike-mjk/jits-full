@@ -5,17 +5,22 @@ import VideoInfoBox from './video_info_box';
 import { connect } from 'react-redux';
 import { fetchVideos } from '../actions';
 
+
 class WatchScreen extends React.Component {
 	componentDidMount() {
+		//Make sure state is populated with videos in database
 		this.props.fetchVideos();
 	}
 
 	render() {
+		//get id from url
 		const { id } = this.props.match.params;
 		const { videosInDatabase } = this.props;
 		let title = '';
 		let channelTitle = '';
+		let idInDatabase = null;
 		if (videosInDatabase[id]) {
+			idInDatabase = true;
 			title = videosInDatabase[id].title;
 			channelTitle = videosInDatabase[id].channelTitle;
 		}
@@ -25,8 +30,10 @@ class WatchScreen extends React.Component {
 					<div className="col-md-8">
 						<YoutubePlayer id={id} />
 						<VideoInfoBox 
+							id={id}
 							title={title}
 							channelTitle={channelTitle}
+							idInDatabase={idInDatabase}
 						/>
 					</div>
 					<div className="col-md-4">
