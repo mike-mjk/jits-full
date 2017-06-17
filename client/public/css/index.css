@@ -2,6 +2,11 @@ body {
     background-color: #F1F1F1;
 }
 
+.thumb-and-text:first-child {
+  padding-left: 15px !important;
+  color: red
+}
+
 .video-info-box {
     background: #fff;
     box-shadow: 0 1px 2px rgba(0,0,0,.1);

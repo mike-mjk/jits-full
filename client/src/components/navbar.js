@@ -3,6 +3,7 @@ import { searchYoutube } from '../actions';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import UserWelcome from './user_welcome';
 
 class Search extends React.Component {
   constructor(props) {
@@ -54,11 +55,12 @@ class NavBar extends React.Component {
   renderAccountLinks() {
     //this.props.authenticated is not built yet
     if (this.props.authenticated) {
-      return (
+      return [
+        <UserWelcome />,
         <li className="nav-item">
           <Link className="nav-link" to="/signout">Sign Out</Link>
         </li>
-      )
+      ];
     } else {
       return [
         <li className="nav-item" key={0}>

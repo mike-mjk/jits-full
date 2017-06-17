@@ -1,5 +1,6 @@
 import React from 'react';
 import AddToCategory from './add_to_category';
+import LikeButton from './like_button';
 
 
 const VideoInfoBox = (props) => {
@@ -11,6 +12,9 @@ const VideoInfoBox = (props) => {
 			<div className="video-info-box">
 				<h2>{props.title}</h2>
 				<p>{props.channelTitle}</p>
+				{props.idInDatabase &&
+					<LikeButton />
+				}
 				{!props.idInDatabase &&
 					<button onClick={onClick}>Click me</button>
 				}

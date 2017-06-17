@@ -1,6 +1,7 @@
 import React from 'react';
 import { categories } from '../app_stuff';
 import { Field, reduxForm } from 'redux-form';
+import { addVideoToDatabase } from '../actions';
 
 class AddToCategory extends React.Component {
 	renderField(field) {
@@ -26,8 +27,9 @@ class AddToCategory extends React.Component {
 	}
 
 	onSubmit(values) {
-		console.log(values);
-		
+		addVideoToDatabase(this.props.id, values.category)
+		// console.log('values.category',values.category);
+
 	}
 
 	render() {

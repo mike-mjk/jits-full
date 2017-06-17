@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 
 class SearchList extends React.Component {
 	render() {
-		return <VideoList videosToRender={this.props.videosInSearchResults} />
+		return (
+			<div className="container" style={{backgroundColor: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,.1)', padding: '15px'}}>
+				<VideoList caller='SearchList' videosToRender={this.props.videosInSearchResults} />
+			</div>
+		)
 	}
 }
 

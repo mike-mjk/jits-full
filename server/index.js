@@ -23,7 +23,19 @@ app.use(bodyParser.json());
 // API endpoints go here!
 // Routes ------------------------------------
 const Video = require('./models/model_video');
+const User = require('./models/user');
 //added /api to all of these routes
+
+//building route to get users display name
+app.get('/api/displayName', requireAuth, function(req, res) {
+    User.findOne({ username: req.user.username })
+        .then((user) => {
+            res.json(user.displayName);   
+        });
+    // res.json(req.user.username);
+
+});
+
 app.get('/api/videos', function(req, res){
     Video.find().sort({ _id: 'desc' }).exec(function(err, videos) {
         if (err) {
@@ -46,9 +58,9 @@ app.post('/api/videos', function(req, res){
         thumbnail: req.body.thumbnail,
         description: req.body.description,
         tags: req.body.tags,
-        // addedBy: req.body.addedBy,
-        // likes: 0,
-        // category: req.body.category
+        addedBy: req.body.addedBy,
+        likes: 0,
+        category: req.body.category
 
     }, function(err, video) {
         if (err) {
@@ -111,19 +123,13 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
     const index = path.resolve(__dirname, '../client/build', 'index.html');
     res.sendFile(index);
 });
-//
-mongoose.connect(config.DATABASE_URL, function(err) {
-    if (err && callback) {
-        return callback(err);
-    }
-
-    // app.listen(config.PORT, function() {
-    //     console.log('Listening on localhost:' + config.PORT);
-    //     if (callback) {
-    //         callback();
-    //     }
-    // });
-});
+//, function(err)
+mongoose.connect(config.DATABASE_URL)
+ // {
+ //    // if (err && callback) {
+ //        // return callback(err);
+ //    // }
+// });
 
 let server;
 function runServer(port=3090) {

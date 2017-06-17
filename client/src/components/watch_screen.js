@@ -4,7 +4,7 @@ import VideoList from './video_list/video_list';
 import VideoInfoBox from './video_info_box';
 import { connect } from 'react-redux';
 import { fetchVideos } from '../actions';
-
+import { rules } from './video_list/video_list_css';
 
 class WatchScreen extends React.Component {
 	componentDidMount() {
@@ -36,8 +36,8 @@ class WatchScreen extends React.Component {
 							idInDatabase={idInDatabase}
 						/>
 					</div>
-					<div className="col-md-4">
-						<VideoList videosToRender={videosInDatabase} />
+					<div className="col-md-4" style={{backgroundColor: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,.1)', paddingTop: '10px', paddingRight: '10px'}}>
+						<VideoList caller='WatchScreen' videosToRender={videosInDatabase} />
 					</div>
 				</div>
 			</div>

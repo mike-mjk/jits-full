@@ -14,6 +14,7 @@ exports.signin = function(req, res, next) {
 exports.signup = function(req, res, next) {
 	const username = req.body.username;
 	const password = req.body.password;
+	const displayName = req.body.displayName;
 
 	if (!username || !password) {
 		return res.status(422).send({ error: 'There was an error with your log in attempt'});
@@ -28,7 +29,8 @@ exports.signup = function(req, res, next) {
 
 		const user = new User({
 			username: username,
-			password: password
+			password: password,
+			displayName: displayName
 		});
 
 		user.save(function(err) {

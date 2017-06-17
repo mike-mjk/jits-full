@@ -2,6 +2,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import config from '../api_key';
 import { extractFromResponse } from '../app_stuff';
+import { getDisplayName } from '../app_stuff';
 //attempting to navigate to /search 
 // import { browserHistory } from 'react-router';
 
@@ -15,14 +16,14 @@ export const UNAUTH_USER = 'unauth_user';
 export const AUTH_ERROR = 'auth_error';
 
 //Auth actions
-export function signinOrSignupUser({ username, password}, history, inOrUp) {
+export function signinOrSignupUser({ username, password, displayName}, history, inOrUp) {
 	return function(dispatch) {
-		axios.post(`/api/${inOrUp}server`, { username, password })
+		axios.post(`/api/${inOrUp}server`, { username, password, displayName })
 			.then(response => {
-				//swith auth to true
-				dispatch({ type: AUTH_USER });
 				//save the JWT token to local storage
 				localStorage.setItem('token', response.data.token);
+				//swith auth to true
+				dispatch({ type: AUTH_USER });
 				//redirect back to home
 				history.push('/')
 			})
@@ -85,7 +86,7 @@ export function searchYoutube(term, history) {
 	  axios.get(URL, query)
 	  	.then(response => {
 	  		//Extract needed data from API response
-	  		var videos = extractFromResponse(response)
+	  		var videos = extractFromResponse(response, 'result.id.videoId')
 				//Transform array of videos into object
 	  		videos = _.mapKeys(videos, 'id');
 
@@ -100,19 +101,26 @@ export function searchYoutube(term, history) {
 
 //use id from url to make request to youtube api
 //extract relevent info, and add to the database
-export function addVideoToDatabase(videoId) {
+export function addVideoToDatabase(videoId, category) {
   var URL = 'https://www.googleapis.com/youtube/v3/videos';
 	var query = {
-		id: videoId,
-		part: 'snippet',
-		r: 'json',
-		key: config.key
+		params: {
+			id: videoId,
+			part: 'snippet',
+			r: 'json',
+			key: config.key
+		}
 	};
-
 	axios.get(URL, query)
 		.then(response => {
-			var video = extractFromResponse(response)
-			console.log('video', video)
+			//'result.id' is a string that gets used because I use extractFromResponse for searching as well as adding
+			//and the Youtube API is slightly different
+			var video = extractFromResponse(response, 'result.id')
+			video[0].category = category;
+			getDisplayName().then((name) => {
+				video[0].addedBy = name;
+				axios.post('/api/videos', video[0]);
+			})
 
 		})
 

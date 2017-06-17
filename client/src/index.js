@@ -25,6 +25,7 @@ import { AUTH_USER } from './actions';
 import HomeList from './components/home_list';
 import SearchList from './components/search_list';
 import WatchScreen from './components/watch_screen';
+import UserWelcome from './components/user_welcome';
 
 
 const createStoreWithMiddleware = applyMiddleware(promise, thunk)(createStore);
@@ -45,6 +46,7 @@ ReactDOM.render(
           <Route path="/signout" component={Signout} />
           <Route path="/signup" component={Signup} />
         	<Route path="/search" component={SearchList} />
+          <Route path="/welcome" component={UserWelcome} />
           <Route path="/" component={HomeList} />
         </Switch>
       </div>

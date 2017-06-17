@@ -27,6 +27,7 @@ class Signup extends React.Component {
 
 	onSubmit(values) {
 		const history = this.props.history;
+		console.log('values', values);
 		this.props.signinOrSignupUser(values, history, 'signup');
 	}
 
