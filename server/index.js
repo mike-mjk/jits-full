@@ -26,7 +26,8 @@ const Video = require('./models/model_video');
 const User = require('./models/user');
 //added /api to all of these routes
 
-//building route to get users display name
+//auth routes
+//route to get users display name
 app.get('/api/displayName', requireAuth, function(req, res) {
     User.findOne({ username: req.user.username })
         .then((user) => {
@@ -36,6 +37,15 @@ app.get('/api/displayName', requireAuth, function(req, res) {
 
 });
 
+app.post('/api/signinserver', requireSignin, Authentication.signin);
+app.post('/api/signupserver', Authentication.signup);
+
+app.get('/api/authcheck', requireAuth, function(req,res) {
+    console.log('authcheck hit');
+    res.json('logged in');
+});
+
+//not auth routes
 app.get('/api/videos', function(req, res){
     Video.find().sort({ _id: 'desc' }).exec(function(err, videos) {
         if (err) {
@@ -47,8 +57,6 @@ app.get('/api/videos', function(req, res){
     });
 });
 
-app.post('/api/signinserver', requireSignin, Authentication.signin);
-app.post('/api/signupserver', Authentication.signup);
 
 app.post('/api/videos', function(req, res){
     Video.create({
@@ -124,7 +132,7 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
     res.sendFile(index);
 });
 //, function(err)
-mongoose.connect(config.DATABASE_URL)
+mongoose.connect(config.DATABASE_URL);
  // {
  //    // if (err && callback) {
  //        // return callback(err);

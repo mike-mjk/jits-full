@@ -64,7 +64,7 @@ class NavBar extends React.Component {
     } else {
       return [
         <li className="nav-item" key={0}>
-          <Link className="nav-Link" to="signin">Sign In</Link>
+          <Link className="nav-Link" to="/signin">Sign In</Link>
         </li>,
         <li className="nav-item" key={1}> 
           <Link className="nav-link" to="/signup">Sign Up</Link>

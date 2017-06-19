@@ -1,15 +1,17 @@
 import React from 'react';
 import YoutubePlayer from './youtube_player';
-import VideoList from './video_list/video_list';
+import VideoList from '../video_list/video_list';
 import VideoInfoBox from './video_info_box';
 import { connect } from 'react-redux';
-import { fetchVideos } from '../actions';
-import { rules } from './video_list/video_list_css';
+import { fetchVideos, getRelatedVideos } from '../../actions';
 
 class WatchScreen extends React.Component {
 	componentDidMount() {
+		const { id } = this.props.match.params;
 		//Make sure state is populated with videos in database
 		this.props.fetchVideos();
+		//Get related videos
+		this.props.getRelatedVideos(id);
 	}
 
 	render() {
@@ -37,7 +39,8 @@ class WatchScreen extends React.Component {
 						/>
 					</div>
 					<div className="col-md-4" style={{backgroundColor: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,.1)', paddingTop: '10px', paddingRight: '10px'}}>
-						<VideoList caller='WatchScreen' videosToRender={videosInDatabase} />
+						<h2>Related Videos</h2>
+						<VideoList caller='WatchScreen' videosToRender={this.props.relatedVideos} />
 					</div>
 				</div>
 			</div>
@@ -47,7 +50,10 @@ class WatchScreen extends React.Component {
 }
 
 function mapStateToProps(state) {
-	return { videosInDatabase: state.videos };
+	return { 
+		videosInDatabase: state.videos,
+		relatedVideos: state.related_videos
+		};
 }
 
-export default connect(mapStateToProps, { fetchVideos })(WatchScreen);
+export default connect(mapStateToProps, { fetchVideos, getRelatedVideos })(WatchScreen);

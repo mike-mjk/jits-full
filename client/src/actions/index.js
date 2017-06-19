@@ -14,6 +14,7 @@ export const SEARCH_YOUTUBE = 'search_youtube';
 export const AUTH_USER = 'auth_user';
 export const UNAUTH_USER = 'unauth_user';
 export const AUTH_ERROR = 'auth_error';
+export const GET_RELATED_VIDEOS = 'get_related_videos';
 
 //Auth actions
 export function signinOrSignupUser({ username, password, displayName}, history, inOrUp) {
@@ -95,6 +96,33 @@ export function searchYoutube(term, history) {
 	  				payload: videos
 	  			})
 	  		history.push('/search');
+	  	})
+	}
+}
+
+export function getRelatedVideos(videoId) {
+	return function(dispatch) {
+		const URL = 'https://www.googleapis.com/youtube/v3/search';
+		const query = {params: {
+	    part: 'snippet',
+	    type: 'video',
+	    relatedToVideoId: videoId,
+	    maxResults: 25,
+	    key: config.key
+	  }}
+
+	  axios.get(URL, query)
+	  	.then(response => {
+	  		//Extract needed data from API response
+	  		var videos = extractFromResponse(response, 'result.id.videoId')
+				//Transform array of videos into object
+	  		videos = _.mapKeys(videos, 'id');
+
+	  		dispatch(
+	  			{ type: GET_RELATED_VIDEOS,
+	  				payload: videos
+	  		  }
+	  		)
 	  	})
 	}
 }

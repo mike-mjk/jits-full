@@ -24,7 +24,7 @@ import { AUTH_USER } from './actions';
 
 import HomeList from './components/home_list';
 import SearchList from './components/search_list';
-import WatchScreen from './components/watch_screen';
+import WatchScreen from './components/watch_screen/watch_screen';
 import UserWelcome from './components/user_welcome';
 
 

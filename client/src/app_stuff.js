@@ -35,7 +35,24 @@ export function getDisplayName() {
 		axios.get('/api/displayName', config)
 			.then(response => {
 				console.log('response.data', response.data);
-				resolve(response.data)
+				resolve(response.data);
+			});
+	});
+}
+
+export function authCheck() {
+	console.log('auth check function in app stuff ran');
+	const config = {
+		headers: { 'authorization': localStorage.getItem('token') }
+	};
+
+	return new Promise((resolve, reject) => {
+		axios.get('/api/authcheck', config)
+			.then(response => {
+				resolve(response.data);
+			})
+			.catch(response => {
+				reject('Unauthorized');
 			});
 	});
 }

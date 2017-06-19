@@ -1,7 +1,8 @@
 import React from 'react';
-import { categories } from '../app_stuff';
+import { categories } from '../../app_stuff';
 import { Field, reduxForm } from 'redux-form';
-import { addVideoToDatabase } from '../actions';
+import { addVideoToDatabase } from '../../actions';
+import { authCheck } from '../../app_stuff';
 
 class AddToCategory extends React.Component {
 	renderField(field) {
@@ -27,7 +28,14 @@ class AddToCategory extends React.Component {
 	}
 
 	onSubmit(values) {
-		addVideoToDatabase(this.props.id, values.category)
+		authCheck().then(data => {
+			if (data === 'logged in') {
+				console.log('data === logged in')
+				addVideoToDatabase(this.props.id, values.category)
+			}
+		}).catch(data => {
+			alert('You must be logged in to add videos');
+		});
 		// console.log('values.category',values.category);
 
 	}

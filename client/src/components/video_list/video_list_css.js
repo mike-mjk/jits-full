@@ -2,7 +2,7 @@
 export const rules = {
 	homeList: {
 		columns: 'col-md-3',
-		col7: '';
+		col7: '',
 		row: {
 			paddingLeft: '15px',
 			borderBottom: '1px solid #e2e2e2'
@@ -35,6 +35,6 @@ export const rules = {
 }
 
 //----------------------
-header {
-	background-color: red
-}
+// header {
+// 	background-color: red
+// }
