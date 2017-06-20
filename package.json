@@ -13,6 +13,9 @@
     "install:server": "cd server && npm install",
     "install:client": "cd client && npm install"
   },
+  "engines": {
+    "node": "6.10.3"
+  },
   "cacheDirectories": [
     "node_modules",
     "server/node_modules",
