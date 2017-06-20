@@ -1,6 +1,7 @@
 // the babel polyfill line was in there from whatever boilerplate starter this used. not sure if I need it.
 //well the old boilerplate before migration to new boilerplate
 // require('babel-polyfill');
+//marker
 
 import React from 'react';
 import ReactDOM from 'react-dom';
