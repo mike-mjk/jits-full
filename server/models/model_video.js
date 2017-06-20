@@ -8,7 +8,7 @@ const VideoSchema = new mongoose.Schema({
     channelTitle: { type: String, required: true },
     thumbnail: { type: String, required: true },
     description: { type: String, required: false },
-    tags: { type: Array, required: true },
+    tags: { type: Array, required: false },
     userDescription: {type: String, required: false },
     addedBy: { type: String, required: false },
     likes: { type: Number, required: false },

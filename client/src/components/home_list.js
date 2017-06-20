@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchVideos } from '../actions';
 import { categories } from '../app_stuff';
 import _ from 'lodash';
-import { rules } from './video_list/video_list_css';
+// import { rules } from './video_list/video_list_css';
 
 
 class HomeList extends React.Component {
@@ -32,7 +32,7 @@ class HomeList extends React.Component {
 
 	objByCategory(category) {
 		const videos = this.props.videosInDatabase;
-		const keys = Object.keys(videos);
+		// const keys = Object.keys(videos);
 		var newObj = _.pickBy(videos, function(value, key) {
 			return (videos[key].category === category );
 		})

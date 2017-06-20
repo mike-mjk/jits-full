@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { getDisplayName } from '../app_stuff';
 
 class UserWelcome extends React.Component {

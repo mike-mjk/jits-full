@@ -47,6 +47,7 @@ app.get('/api/authcheck', requireAuth, function(req,res) {
 
 //not auth routes
 app.get('/api/videos', function(req, res){
+    console.log('/api/videos hit in server');
     Video.find().sort({ _id: 'desc' }).exec(function(err, videos) {
         if (err) {
             return res.status(500).json({

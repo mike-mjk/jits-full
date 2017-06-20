@@ -3,6 +3,8 @@ import { categories } from '../../app_stuff';
 import { Field, reduxForm } from 'redux-form';
 import { addVideoToDatabase } from '../../actions';
 import { authCheck } from '../../app_stuff';
+import { fetchVideos } from '../../actions';
+import { connect } from 'react-redux';
 
 class AddToCategory extends React.Component {
 	renderField(field) {
@@ -27,6 +29,10 @@ class AddToCategory extends React.Component {
 		})
 	}
 
+	onClick() {
+		this.props.fetchVideos();
+	}
+
 	onSubmit(values) {
 		authCheck().then(data => {
 			if (data === 'logged in') {
@@ -43,10 +49,13 @@ class AddToCategory extends React.Component {
 	render() {
 		const { handleSubmit } = this.props;
 		return (
-			<form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
-				{this.renderCategories()}
-				<button type="submit">Add Video</button>
-			</form>
+			<div>
+				<form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
+					{this.renderCategories()}
+					<button type="submit">Add Video</button>
+				</form>
+				<button onClick={this.onClick.bind(this)}>Fetch Videos button</button>
+			</div>
 		)
 	}
 }
@@ -61,4 +70,6 @@ function validate(values) {
 export default reduxForm ({
 	validate,
 	form: 'addToCategory'
-})(AddToCategory);
+})(
+connect(null, {fetchVideos })(AddToCategory)
+);
