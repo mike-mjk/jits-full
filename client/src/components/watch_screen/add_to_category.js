@@ -29,9 +29,6 @@ class AddToCategory extends React.Component {
 		})
 	}
 
-	onClick() {
-		this.props.fetchVideos();
-	}
 
 	onSubmit(values) {
 		authCheck().then(data => {
@@ -53,7 +50,6 @@ class AddToCategory extends React.Component {
 					{this.renderCategories()}
 					<button type="submit">Add Video</button>
 				</form>
-				<button onClick={this.onClick.bind(this)}>Fetch Videos button</button>
 			</div>
 		)
 	}

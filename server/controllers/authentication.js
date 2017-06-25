@@ -34,18 +34,7 @@ exports.signup = function(req, res, next) {
 			username: username,
 			password: password,
 			displayName: displayName,
-			likedVideos: { 'a-6jC4UofMw': 
-      { 
-        id: 'a-6jC4UofMw',
-        title: '10p SD 1',
-        channelTitle: 'Michael Kostolnik',
-        thumbnail: 'https://i.ytimg.com/vi/a-6jC4UofMw/mqdefault.jpg',
-        description: '',
-        addedBy: 'Other Mike',
-        likes: 16,
-        category: 'Competition',
-        __v: 0,
-        tags: [] }}
+			likedVideos: {}
 		});
 
 		user.save(function(err) {
