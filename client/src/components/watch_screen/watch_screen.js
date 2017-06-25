@@ -44,6 +44,8 @@ class WatchScreen extends React.Component {
 		//get id from url
 		// const { id } = this.props.match.params;
 		const { videosInDatabase } = this.props;
+		console.log('videosInDatabase', videosInDatabase);
+		console.log('this.props.match.params.id', this.props.match.params.id)
 		let title = '';
 		let channelTitle = '';
 		if (this.props.match.params.id in videosInDatabase) { //videosInDatabase[this.props.match.params.id]
