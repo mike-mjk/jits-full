@@ -2,7 +2,7 @@ const jwt = require('jwt-simple');
 const User = require('../models/user');
 // const config = require('../secret');
 let config = null;
-(process.env.NODE_ENV === 'production' ? null : config = require('../secret'));
+(process.env.NODE_ENV === 'production' ? config = require('../fakeSecret') : config = require('../secret'));
 
 function tokenForUser(user) {
 	const timestamp = new Date().getTime();
