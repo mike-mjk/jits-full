@@ -4,8 +4,13 @@ const config = require('../secret');
 
 function tokenForUser(user) {
 	const timestamp = new Date().getTime();
-	return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
-	// return jwt.encode({ sub: user.id, iat: timestamp }, (process.env.NODE_ENV === 'production' ? process.env.JWTSECRET : config.secret));
+<<<<<<< HEAD
+// 	return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+// 	// return jwt.encode({ sub: user.id, iat: timestamp }, (process.env.NODE_ENV === 'production' ? process.env.JWTSECRET : config.secret));
+// =======
+// 	// return jwt.encode({ sub: user.id, iat: timestamp }, process.env.JWTSECRET);
+// 	return jwt.encode({ sub: user.id, iat: timestamp }, (process.env.NODE_ENV === 'production' ? process.env.JWTSECRET : config.secret));
+>>>>>>> e1fa11ad838f85d9c85567346ed997fa82fe4a64
 }
 
 exports.signin = function(req, res, next) {
