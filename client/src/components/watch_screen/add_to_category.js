@@ -36,8 +36,7 @@ class AddToCategory extends React.Component {
 	onSubmit(values) {
 		authCheck().then(data => {
 			if (data === 'logged in') {
-				console.log('data === logged in')
-				addVideoToDatabase(this.props.id, values.category)
+				this.props.addVideoToDatabase(this.props.id, values.category)
 			}
 		}).catch(data => {
 			alert('You must be logged in to add videos');
@@ -71,5 +70,5 @@ export default reduxForm ({
 	validate,
 	form: 'addToCategory'
 })(
-connect(null, {fetchVideos })(AddToCategory)
+connect(null, {fetchVideos, addVideoToDatabase })(AddToCategory)
 );

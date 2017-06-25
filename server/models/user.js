@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
 	username: { type: String, unique: true, lowercase: true },
 	password: { type: String },
 	displayName: { type: String },
-	likedVideos: { type: Array, required: false }
+	likedVideos: { type: Object, required: true }
 });
 
 userSchema.pre('save', function(next) {

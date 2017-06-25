@@ -28,6 +28,7 @@ import HomeList from './components/home_list';
 import SearchList from './components/search_list';
 import WatchScreen from './components/watch_screen/watch_screen';
 import UserWelcome from './components/user_welcome';
+import UserProfile from './components/profile/user_profile'
 
 
 const logger = createLogger({});
@@ -50,6 +51,7 @@ ReactDOM.render(
           <Route path="/signup" component={Signup} />
         	<Route path="/search" component={SearchList} />
           <Route path="/welcome" component={UserWelcome} />
+          <Route path="/profile/:userid" component={UserProfile} />
           <Route path="/" component={HomeList} />
         </Switch>
       </div>

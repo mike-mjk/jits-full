@@ -132,8 +132,50 @@ export function getRelatedVideos(videoId) {
 //extract relevent info, and add to the database
 
 //latest non working
+export function addVideoToDatabase(videoId, category) {
+	return function(dispatch) {
+	  var URL = 'https://www.googleapis.com/youtube/v3/videos';
+		var query = {
+			params: {
+				id: videoId,
+				part: 'snippet',
+				r: 'json',
+				key: config.key
+			}
+		};
+		axios.get(URL, query)
+			.then(response => {
+				//'result.id' is a string that gets used because I use extractFromResponse for searching as well as adding
+				//and the Youtube API is slightly different
+				var video = extractFromResponse(response, 'result.id')
+				video[0].category = category;
+				
+				getDisplayName().then((name) => {
+					video[0].addedBy = name;
+
+					axios.post('/api/videos', video[0])
+					.then(() => {
+						axios.get('/api/videos')
+						.then((data) => {
+							//console.log('data', data)
+							
+							dispatch({
+								type: FETCH_VIDEOS,
+								payload: data
+							}) 
+
+						})
+
+					});
+				})
+
+			})
+	}
+	
+}
+
+//original working version
 // export function addVideoToDatabase(videoId, category) {
-// 	return function(dispatch) {
 //   var URL = 'https://www.googleapis.com/youtube/v3/videos';
 // 	var query = {
 // 		params: {
@@ -148,51 +190,18 @@ export function getRelatedVideos(videoId) {
 // 			//'result.id' is a string that gets used because I use extractFromResponse for searching as well as adding
 // 			//and the Youtube API is slightly different
 // 			var video = extractFromResponse(response, 'result.id')
+
 // 			video[0].category = category;
+
 // 			getDisplayName().then((name) => {
 // 				video[0].addedBy = name;
-// 				axios.post('/api/videos', video[0]).then(() => {
-// 					const request = axios.get('/api/videos');
-
-// 					dispatch(
-// 						{
-// 							type: FETCH_VIDEOS,
-// 							payload: request
-// 						}
-// 					) 
-// 				});
+// 				axios.post('/api/videos', video[0]);
 // 			})
 
 // 		})
-// 	}
 // }
 
-//original working version
-export function addVideoToDatabase(videoId, category) {
-  var URL = 'https://www.googleapis.com/youtube/v3/videos';
-	var query = {
-		params: {
-			id: videoId,
-			part: 'snippet',
-			r: 'json',
-			key: config.key
-		}
-	};
-	axios.get(URL, query)
-		.then(response => {
-			//'result.id' is a string that gets used because I use extractFromResponse for searching as well as adding
-			//and the Youtube API is slightly different
-			var video = extractFromResponse(response, 'result.id')
-			video[0].category = category;
-			getDisplayName().then((name) => {
-				video[0].addedBy = name;
-				axios.post('/api/videos', video[0]);
-			})
-
-		})
-}
-
-//latest not working version of addVideo function
+//not working version of addVideo function
 // export function addVideoToDatabase(videoId, category) {
 // 	return function(dispatch) {
 //   var URL = 'https://www.googleapis.com/youtube/v3/videos';

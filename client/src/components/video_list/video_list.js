@@ -35,7 +35,7 @@ class VideoList extends React.Component {
 						<VideoText 
 							style={(caller === 'WatchScreen') ? {padding: '0px'} : {}}
 							className={style.col7}
-							videoUrl={`watch/${video.id}`}
+							videoUrl={`/watch/${video.id}`}
 							videoTitle={video.title} 
 							channelTitle={video.channelTitle}
 							addedBy={video.addedBy ? `Added By: ${video.addedBy}` : ''}

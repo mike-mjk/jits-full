@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 
+const _ = require('lodash');
+
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
@@ -26,6 +28,80 @@ const Video = require('./models/model_video');
 const User = require('./models/user');
 //added /api to all of these routes
 
+//like related routes
+app.get('/api/islikedbyme', requireAuth, function(req, res) {
+    User.findOne({ username: req.user.username })
+        .then((user) => {
+            const isLiked = (req.query.id in user.likedVideos);   
+            res.json(isLiked);
+        });
+
+});
+//devquestion run find video and find user simultaneously??
+//devquestion the "lodashed video" has an undefined: true key value pair
+app.get('/api/addtoliked', requireAuth, function(req, res) {
+    Video.findOne({ id: req.query.id })
+        .then(video => {
+            User.findOne({ username: req.user.username })
+                .then(user => {
+                    video = _.mapKeys(video, 'id');
+                    delete video[req.query.id]._id;
+                    user.likedVideos[req.query.id] = video[req.query.id]
+                    user.markModified('likedVideos');
+                    user.save();
+                    res.json('video was liked');
+                })
+        });
+});
+
+
+
+app.get('/api/removefromliked', requireAuth, function(req, res) {
+    Video.findOne({ id: req.query.id })
+        .then(video => {
+            User.findOne({ username: req.user.username })
+                .then(user => {
+                    // video = _.mapKeys(video, 'id');
+                    // delete video[req.query.id]._id;
+                    delete user.likedVideos[req.query.id]
+                    console.log('user', user);
+                    // user.likedVideos[req.query.id] = video[req.query.id]
+                    user.markModified('likedVideos');
+                    user.save();
+                    res.json('video was removed from liked videos');
+                })
+        });
+});
+
+
+
+app.get('/api/numberoflikes', function(req, res) {
+    Video.findOne({ id: req.query.id })
+        .then((video) => {
+            res.json(video.likes)
+        });
+});
+
+app.get('/api/incrementlikes', function(req, res) {
+    Video.findOne({ id: req.query.id })
+        .then((video) => {
+          video.likes = video.likes + 1;
+          //is video.save async???
+          video.save();
+          res.json(video.likes);
+        });
+});
+
+app.get('/api/decrementlikes', function(req, res) {
+    Video.findOne({ id: req.query.id })
+        .then((video) => {
+          video.likes = video.likes - 1;
+          //is video.save async???
+          video.save();
+          res.json(video.likes);
+        });
+});
+
 //auth routes
 //route to get users display name
 app.get('/api/displayName', requireAuth, function(req, res) {
@@ -36,6 +112,7 @@ app.get('/api/displayName', requireAuth, function(req, res) {
     // res.json(req.user.username);
 
 });
+
 
 app.post('/api/signinserver', requireSignin, Authentication.signin);
 app.post('/api/signupserver', Authentication.signup);

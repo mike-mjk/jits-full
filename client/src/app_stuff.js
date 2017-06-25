@@ -34,14 +34,91 @@ export function getDisplayName() {
 	return new Promise((resolve, reject) => {
 		axios.get('/api/displayName', config)
 			.then(response => {
-				console.log('response.data', response.data);
+				resolve(response.data);
+			});
+	});
+}
+
+export function isLikedByMe(id) {
+	const config = {
+		headers: { 'authorization': localStorage.getItem('token') },
+		params: { 'id': id }
+	};
+
+	return new Promise((resolve, reject) => {
+		axios.get('/api/islikedbyme', config)
+			.then(response => {
+				resolve(response.data);
+			});
+	});
+}
+
+export function addToLiked(id) {
+	const config = {
+		headers: { 'authorization': localStorage.getItem('token') },
+		params: { 'id': id }
+	};
+	return new Promise((resolve, reject) => {
+		axios.get('/api/addtoliked', config)
+			.then(response => {
+				resolve(response.data);
+			});
+	});
+}
+
+export function removeFromLiked(id) {
+	const config = {
+		headers: { 'authorization': localStorage.getItem('token') },
+		params: { 'id': id }
+	};
+	return new Promise((resolve, reject) => {
+		axios.get('/api/removefromliked', config)
+			.then(response => {
+				resolve(response.data);
+			});
+	});
+}
+
+export function incrementLikes(id) {
+	const config = {
+		params: { 'id': id }
+	};
+
+	return new Promise((resolve, reject) => {
+		axios.get('/api/incrementlikes', config)
+			.then(response => {
+				resolve(response.data)
+			});
+	});
+}
+
+export function decrementLikes(id) {
+	const config = {
+		params: { 'id': id }
+	};
+
+	return new Promise((resolve, reject) => {
+		axios.get('/api/decrementlikes', config)
+			.then(response => {
+				resolve(response.data)
+			});
+	});
+}
+
+export function getNumberOfLikes(id) {
+	const config = {
+		params: { 'id': id }
+	};
+
+	return new Promise((resolve, reject) => {
+		axios.get('/api/numberoflikes', config)
+			.then(response => {
 				resolve(response.data);
 			});
 	});
 }
 
 export function authCheck() {
-	console.log('auth check function in app stuff ran');
 	const config = {
 		headers: { 'authorization': localStorage.getItem('token') }
 	};
