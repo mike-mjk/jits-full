@@ -6,7 +6,14 @@ class Disqus extends React.Component {
 		this.page.url = "http://jits-app.herokuapp.com"
 		this.page.identifier = "fakeIdentifier"
 	}
-	
+
+	componentDidMount() {
+		var d = document, s = d.createElement('script');
+		s.src = 'https://jitstube.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	}
+
 	render() {
 		return (
 			<div id="disqus_thread"></div>

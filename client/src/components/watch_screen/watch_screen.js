@@ -68,7 +68,7 @@ class WatchScreen extends React.Component {
 						
 
 
-						
+						<Disqus />
 
 
 
