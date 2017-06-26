@@ -26,7 +26,6 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log('Search render');
     return (
       <form onSubmit={this.onFormSubmit} id="search-youtube-form" className="navbar-form navbar-left">
         
@@ -74,7 +73,6 @@ class NavBar extends React.Component {
   }
 
   render() {
-    console.log('navbar render');
     return (
       <nav className='navbar navbar-default'>
         <div className='container'>

@@ -29,6 +29,7 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
 //jwt strategy
 let secret = null;
 (process.env.NODE_ENV === 'production' ? secret = process.env.JWTSECRET : secret = config.secret);
+console.log('secret in passport.js', secret);
 const jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
 	// secretOrKey: config.secret
