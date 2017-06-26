@@ -5,7 +5,8 @@ import VideoInfoBox from './video_info_box';
 import { connect } from 'react-redux';
 import { fetchVideos, getRelatedVideos } from '../../actions';
 import ReactDisqusThread from 'react-disqus-thread';
-//fake comment
+import Disqus from '../disqus/disqus';
+
 class WatchScreen extends React.Component {
 	constructor(props) {
 		super(props);
@@ -52,6 +53,7 @@ class WatchScreen extends React.Component {
 			title = videosInDatabase[this.props.match.params.id].title;
 			channelTitle = videosInDatabase[this.props.match.params.id].channelTitle;
 		}
+
 		return (
 			<div className="container">
 		    <div className="row">
@@ -63,8 +65,16 @@ class WatchScreen extends React.Component {
 							channelTitle={channelTitle}
 							idInDatabase={this.props.match.params.id in videosInDatabase} //Boolean(this.props.videosInDatabase[this.props.match.params.id])
 						/>
+						
+
+
+						
+
+
+
+
 						<ReactDisqusThread
-							shortname="jitstube"
+							shortname="jitstube" 
 							identifier={this.props.match.params.id}
 							title="placeholder title"
 							url="http://jits-app.herokuapp.com"
