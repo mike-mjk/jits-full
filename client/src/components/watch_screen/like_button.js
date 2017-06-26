@@ -10,6 +10,8 @@ class LikeButton extends React.Component {
 			liked: null,
 			numberOfLikes: null
 		};
+
+		this.onClick = this.onClick.bind(this);
 	}
 
 	componentDidMount() {
@@ -30,13 +32,26 @@ class LikeButton extends React.Component {
 			});
 	}
 
+		incOrDec() {
+			this.state.liked
+			? decrementLikes(this.props.id)
+				.then(data => this.setState({ numberOfLikes: data, liked: false }), removeFromLiked(this.props.id))
+			: incrementLikes(this.props.id)
+				.then(data => this.setState({ numberOfLikes: data, liked: true }), addToLiked(this.props.id));
+		} 
+
 	onClick() {
-		this.state.liked
-		? decrementLikes(this.props.id)
-			.then(data => this.setState({ numberOfLikes: data, liked: false }), removeFromLiked(this.props.id))
-		: incrementLikes(this.props.id)
-			.then(data => this.setState({ numberOfLikes: data, liked: true }), addToLiked(this.props.id));
+		authCheck()
+		.then(data => {
+			if (data === 'logged in') {
+				this.incOrDec();
+			}
+		})
+		.catch(data => {
+			alert('You must be logged in to like a video');
+		});
 	}
+		// false ? this.incOrDec() : alert('you must be logged in');
 
 	render() {
 		return (
