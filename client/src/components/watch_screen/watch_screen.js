@@ -75,11 +75,6 @@ class WatchScreen extends React.Component {
 
 						<ReactDisqusThread
 							shortname="jitstube" 
-							identifier={this.props.match.params.id}
-							title="placeholder title"
-							url="http://jits-app.herokuapp.com"
-							category_id="videos"
-							onNewComment={this.handleNewComment}
 						/>
 						{/*this.props.match.params.id in videosInDatabase ? 
 							<ReactDisqusThread
