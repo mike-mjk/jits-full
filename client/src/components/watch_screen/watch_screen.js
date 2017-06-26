@@ -66,7 +66,7 @@ class WatchScreen extends React.Component {
 						<ReactDisqusComments
 							shortname="jitstube"
 							identifier={this.props.match.params.id}
-							title={title}
+							title="placeholder title"
 							url="http://jits-app.herokuapp.com"
 							category_id="videos"
 							onNewComment={this.handleNewComment}
