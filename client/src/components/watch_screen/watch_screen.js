@@ -4,7 +4,7 @@ import VideoList from '../video_list/video_list';
 import VideoInfoBox from './video_info_box';
 import { connect } from 'react-redux';
 import { fetchVideos, getRelatedVideos } from '../../actions';
-import ReactDisqusThread from 'react-disqus-thread';
+import ReactDisqusComments from 'react-disqus-comments';
 //fake comment
 class WatchScreen extends React.Component {
 	constructor(props) {
@@ -63,7 +63,15 @@ class WatchScreen extends React.Component {
 							channelTitle={channelTitle}
 							idInDatabase={this.props.match.params.id in videosInDatabase} //Boolean(this.props.videosInDatabase[this.props.match.params.id])
 						/>
-						{this.props.match.params.id in videosInDatabase ? 
+						<ReactDisqusComments
+							shortname="jitstube"
+							identifier={this.props.match.params.id}
+							title={title}
+							url={this.props.match.url}
+							category_id="videos"
+							onNewComment={this.handleNewComment}
+						/>
+						{/*this.props.match.params.id in videosInDatabase ? 
 							<ReactDisqusThread
 								shortname="jitstube"
 								identifier={this.props.match.params.id}
@@ -71,7 +79,7 @@ class WatchScreen extends React.Component {
 								url={this.props.match.url}
 								category_id="videos"
 								onNewComment={this.handleNewComment} /> : 
-							null}
+							null*/}
 
 					</div>
 					<div className="col-md-4" style={{backgroundColor: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,.1)', paddingTop: '10px', paddingRight: '10px'}}>
