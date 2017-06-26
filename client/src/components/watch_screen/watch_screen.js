@@ -67,7 +67,7 @@ class WatchScreen extends React.Component {
 							shortname="jitstube"
 							identifier={this.props.match.params.id}
 							title={title}
-							url={this.props.match.url}
+							url="http://jits-app.herokuapp.com"
 							category_id="videos"
 							onNewComment={this.handleNewComment}
 						/>
