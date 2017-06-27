@@ -4,6 +4,7 @@ import LikeButton from './like_button';
 
 
 const VideoInfoBox = (props) => {
+	console.log('props.idInDatabase', props.idInDatabase);
 	return (
 		<div>
 			<div className="video-info-box">

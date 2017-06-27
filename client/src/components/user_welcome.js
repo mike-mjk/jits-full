@@ -9,9 +9,10 @@ class UserWelcome extends React.Component {
 	}
 	componentWillMount() {
 
-		getDisplayName().then((data) => {
-				this.setState({ displayName: data })
-			})
+		getDisplayName()
+		.then(data => {
+			this.setState({ displayName: data })
+		})
 	}
 
 	render() {

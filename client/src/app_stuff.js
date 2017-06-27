@@ -26,6 +26,24 @@ export const categories = [
 	'Other'
 	 ]
 
+// export function getUsernameDisplayNameObj() {
+// 	return new Promise((resolve, reject) => {
+// 		axios.get('/api/getusernamedisplaynameobj')
+// 		.then(response => {
+// 			resolve(response.data);
+// 		});
+// 	});
+// }
+
+export async function getUsernameDisplayNameObj() {
+	let response = await axios.get('/api/getusernamedisplaynameobj');
+	return response.data;
+}
+
+
+
+
+
 export function getDisplayName() {
 	const config = {
 		headers: { 'authorization': localStorage.getItem('token') }
@@ -33,6 +51,19 @@ export function getDisplayName() {
 
 	return new Promise((resolve, reject) => {
 		axios.get('/api/displayName', config)
+			.then(response => {
+				resolve(response.data);
+			});
+	});
+}
+
+export function getUsername() {
+	const config = {
+		headers: { 'authorization': localStorage.getItem('token') }
+	};
+
+	return new Promise((resolve, reject) => {
+		axios.get('/api/username', config)
 			.then(response => {
 				resolve(response.data);
 			});

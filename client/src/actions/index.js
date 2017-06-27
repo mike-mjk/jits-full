@@ -3,6 +3,7 @@ import _ from 'lodash';
 import config from '../api_key';
 import { extractFromResponse } from '../app_stuff';
 import { getDisplayName } from '../app_stuff';
+import { getUsername } from '../app_stuff';
 //attempting to navigate to /search 
 // import { browserHistory } from 'react-router';
 
@@ -29,8 +30,8 @@ export function signinOrSignupUser({ username, password, displayName}, history, 
 				history.push('/')
 			})
 			.catch(error => {
-				console.log(error.response);
-				dispatch(authError(error.response.data.error));
+				console.log('error console log', error.response);
+				dispatch(authError('The username and password you have supplied are incorrect.'));
 			});
 	}
 }
@@ -150,7 +151,8 @@ export function addVideoToDatabase(videoId, category) {
 				var video = extractFromResponse(response, 'result.id')
 				video[0].category = category;
 				
-				getDisplayName().then((name) => {
+				getUsername()
+				.then((name) => {
 					video[0].addedBy = name;
 
 					axios.post('/api/videos', video[0])
@@ -173,63 +175,3 @@ export function addVideoToDatabase(videoId, category) {
 	}
 	
 }
-
-//original working version
-// export function addVideoToDatabase(videoId, category) {
-//   var URL = 'https://www.googleapis.com/youtube/v3/videos';
-// 	var query = {
-// 		params: {
-// 			id: videoId,
-// 			part: 'snippet',
-// 			r: 'json',
-// 			key: config.key
-// 		}
-// 	};
-// 	axios.get(URL, query)
-// 		.then(response => {
-// 			//'result.id' is a string that gets used because I use extractFromResponse for searching as well as adding
-// 			//and the Youtube API is slightly different
-// 			var video = extractFromResponse(response, 'result.id')
-
-// 			video[0].category = category;
-
-// 			getDisplayName().then((name) => {
-// 				video[0].addedBy = name;
-// 				axios.post('/api/videos', video[0]);
-// 			})
-
-// 		})
-// }
-
-//not working version of addVideo function
-// export function addVideoToDatabase(videoId, category) {
-// 	return function(dispatch) {
-//   var URL = 'https://www.googleapis.com/youtube/v3/videos';
-// 	var query = {
-// 		params: {
-// 			id: videoId,
-// 			part: 'snippet',
-// 			r: 'json',
-// 			key: config.key
-// 		}
-// 	};
-// 	axios.get(URL, query)
-// 		.then(response => {
-// 			//'result.id' is a string that gets used because I use extractFromResponse for searching as well as adding
-// 			//and the Youtube API is slightly different
-// 			var video = extractFromResponse(response, 'result.id')
-// 			video[0].category = category;
-// 			getDisplayName().then((name) => {
-// 				video[0].addedBy = name;
-// 				axios.post('/api/videos', video[0]).then((response) => { 
-// 					console.log('response', response);
-// 					dispatch({
-// 						type: FETCH_VIDEOS
-// 					});
-// 					console.log('after fetchVideos')
-// 				});
-// 			})
-
-// 		})
-// 	}
-// }

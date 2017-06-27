@@ -106,11 +106,29 @@ app.get('/api/decrementlikes', function(req, res) {
 //route to get users display name
 app.get('/api/displayName', requireAuth, function(req, res) {
     User.findOne({ username: req.user.username })
-        .then((user) => {
-            res.json(user.displayName);   
-        });
+    .then((user) => {
+        res.json(user.displayName);   
+    });
     // res.json(req.user.username);
 
+});
+
+app.get('/api/username', requireAuth, function(req, res) {
+    User.findOne({ username: req.user.username })
+    .then((user) => {
+        res.json(user.username);   
+    });
+});
+
+app.get('/api/getusernamedisplaynameobj', function(req, res) {
+    User.find({})
+    .then(users => {
+        let usernameDisplayNameObj = {};
+        users.map(user => {
+          usernameDisplayNameObj[user.username] = user.displayName;
+        });
+        res.json(usernameDisplayNameObj);
+    });
 });
 
 

@@ -39,6 +39,13 @@ class WatchScreen extends React.Component {
 		// 	idInDatabase: idInDatabase
 		// })
 	}
+	componentWillReceiveProps() {
+		console.log('component will receive');
+	}
+
+	componentDidUpdate() {
+		console.log('componentDidUpdate ran');
+	}
 	//this code should probably be changed to have the title be from the state, but it works
 	//so i'm keeping it for now devquestion
 	render() {
