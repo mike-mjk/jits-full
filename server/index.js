@@ -26,7 +26,14 @@ app.use(bodyParser.json());
 // Routes ------------------------------------
 const Video = require('./models/model_video');
 const User = require('./models/user');
-//added /api to all of these routes
+
+app.get('/api/getuser', function(req, res) {
+    User.findOne({ username: req.query.id })
+    .then(user => {
+        console.log(user);
+        res.json(user);
+    });
+});
 
 //like related routes
 app.get('/api/islikedbyme', requireAuth, function(req, res) {
@@ -41,17 +48,17 @@ app.get('/api/islikedbyme', requireAuth, function(req, res) {
 //devquestion the "lodashed video" has an undefined: true key value pair
 app.get('/api/addtoliked', requireAuth, function(req, res) {
     Video.findOne({ id: req.query.id })
-        .then(video => {
-            User.findOne({ username: req.user.username })
-                .then(user => {
-                    video = _.mapKeys(video, 'id');
-                    delete video[req.query.id]._id;
-                    user.likedVideos[req.query.id] = video[req.query.id]
-                    user.markModified('likedVideos');
-                    user.save();
-                    res.json('video was liked');
-                })
-        });
+    .then(video => {
+        User.findOne({ username: req.user.username })
+        .then(user => {
+            video = _.mapKeys(video, 'id');
+            delete video[req.query.id]._id;
+            user.likedVideos[req.query.id] = video[req.query.id]
+            user.markModified('likedVideos');
+            user.save();
+            res.json('video was liked');
+        })
+    });
 });
 
 
@@ -107,7 +114,7 @@ app.get('/api/decrementlikes', function(req, res) {
 app.get('/api/displayName', requireAuth, function(req, res) {
     User.findOne({ username: req.user.username })
     .then((user) => {
-        res.json(user.displayName);   
+        res.json({displayName: user.displayName, username: user.username});   
     });
     // res.json(req.user.username);
 

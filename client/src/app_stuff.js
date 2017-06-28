@@ -35,6 +35,15 @@ export const categories = [
 // 	});
 // }
 
+export async function getUser(id) {
+	const config = {
+		params: { id: id }
+	};
+	
+	let response = await axios.get('/api/getuser', config);
+	return response.data;
+}
+
 export async function getUsernameDisplayNameObj() {
 	let response = await axios.get('/api/getusernamedisplaynameobj');
 	return response.data;

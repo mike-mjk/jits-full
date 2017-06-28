@@ -46,12 +46,12 @@ ReactDOM.render(
         <Route path="/" component={NavBar} />
         <Switch>
         	<Route path="/watch/:id" component={WatchScreen} />
+          <Route path="/profile/:userid" component={UserProfile} />
           <Route path="/signin" component={Signin} />
           <Route path="/signout" component={Signout} />
           <Route path="/signup" component={Signup} />
-        	<Route path="/search" component={SearchList} />
+          <Route path="/search" component={SearchList} />
           <Route path="/welcome" component={UserWelcome} />
-          <Route path="/profile/:userid" component={UserProfile} />
           <Route path="/" component={HomeList} />
         </Switch>
       </div>

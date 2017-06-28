@@ -4,6 +4,7 @@ import VideoText from './video_text';
 import _ from 'lodash';
 import { rules } from './video_list_css';
 import { getUsernameDisplayNameObj } from '../../app_stuff';
+import { Link } from 'react-router-dom';
 
 class VideoList extends React.Component {
 	constructor(props) {
@@ -51,6 +52,7 @@ class VideoList extends React.Component {
 		console.log('usernameDisplayNameObj state', this.state.usernameDisplayNameObj);
 		return (
 			_.map(videosToRender, (video) => {
+				const displayName = this.state.usernameDisplayNameObj[video.addedBy];
 				return (
 					<div style={style.video} className={style.columns} key={video.id}>
 						<Thumbnail className={(caller === 'WatchScreen') ? style.col5 : ''} videoUrl={`/watch/${video.id}`} thumbnailUrl={video.thumbnail} />
@@ -60,7 +62,8 @@ class VideoList extends React.Component {
 							videoUrl={`/watch/${video.id}`}
 							videoTitle={video.title}
 							channelTitle={video.channelTitle}
-							addedBy={video.addedBy ? `Added By: ${this.state.usernameDisplayNameObj[video.addedBy]}` : ''}
+							userid={video.addedBy}
+							addedBy={video.addedBy ? `${displayName}` : ''}
 							likes={((caller === 'HomeList') & (video.likes || video.likes === 0)) ? `Likes: ${video.likes}` : ''}
 						/>
 					</div>
@@ -82,4 +85,26 @@ class VideoList extends React.Component {
 }
 
 export default VideoList;
+
+
+	// 	return (
+	// 		_.map(videosToRender, (video) => {
+	// 			const displayName = 
+	// 			return (
+	// 				<div style={style.video} className={style.columns} key={video.id}>
+	// 					<Thumbnail className={(caller === 'WatchScreen') ? style.col5 : ''} videoUrl={`/watch/${video.id}`} thumbnailUrl={video.thumbnail} />
+	// 					<VideoText
+	// 						style={(caller === 'WatchScreen') ? {padding: '0px'} : {}}
+	// 						className={style.col7}
+	// 						videoUrl={`/watch/${video.id}`}
+	// 						videoTitle={video.title}
+	// 						channelTitle={video.channelTitle}
+	// 						addedBy={video.addedBy ? `Added By: ${this.state.usernameDisplayNameObj[video.addedBy]}` : ''}
+	// 						likes={((caller === 'HomeList') & (video.likes || video.likes === 0)) ? `Likes: ${video.likes}` : ''}
+	// 					/>
+	// 				</div>
+	// 			)
+	// 		})
+	// 	);
+	// }
 
