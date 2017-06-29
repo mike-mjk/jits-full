@@ -7,7 +7,7 @@ const VideoInfoBox = (props) => {
 	console.log('props.idInDatabase', props.idInDatabase);
 	return (
 		<div>
-			<div className="video-info-box">
+			<div className="container-box">
 				<h2>{props.title}</h2>
 				<p>{props.channelTitle}</p>
 				{props.idInDatabase &&
@@ -19,6 +19,9 @@ const VideoInfoBox = (props) => {
 				{!props.idInDatabase && 
 					<AddToCategory id={props.id} />
 				}
+			</div>
+			<div className="container-box" style={{marginTop: '15px', padding: '12px'}}>
+				{props.description}
 			</div>
 		</div>
 	)

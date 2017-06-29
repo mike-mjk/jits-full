@@ -42,7 +42,7 @@ class HomeList extends React.Component {
 
 	renderLists() {
 		return (
-			<div className="container" style={{backgroundColor: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,.1)'}}>
+			<div className="container container-box" >
 				{this.makeListWithCategoryJsx()}
 			</div>
 		)

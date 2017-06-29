@@ -16,11 +16,10 @@ class Disqus extends React.Component {
 
 	render() {
 		return (
-			<div id="disqus_thread"></div>
+			<div id="disqus_thread" style={{marginTop: '30px'}}></div>
 		)
 	}
 }
-
 export default Disqus;
 
 

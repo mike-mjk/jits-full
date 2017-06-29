@@ -56,9 +56,13 @@ class WatchScreen extends React.Component {
 		console.log('this.props.match.params.id', this.props.match.params.id)
 		let title = '';
 		let channelTitle = '';
+		let description = '';
 		if (this.props.match.params.id in videosInDatabase) { //videosInDatabase[this.props.match.params.id]
 			title = videosInDatabase[this.props.match.params.id].title;
 			channelTitle = videosInDatabase[this.props.match.params.id].channelTitle;
+			if (videosInDatabase[this.props.match.params.id].description) {
+				description = videosInDatabase[this.props.match.params.id].description;
+			}
 		}
 
 		return (
@@ -70,31 +74,12 @@ class WatchScreen extends React.Component {
 							id={this.props.match.params.id}
 							title={title}
 							channelTitle={channelTitle}
-							idInDatabase={this.props.match.params.id in videosInDatabase} //Boolean(this.props.videosInDatabase[this.props.match.params.id])
+							idInDatabase={this.props.match.params.id in videosInDatabase}
+							description={description}
 						/>
-						
-
-
 						<Disqus />
-
-
-
-
-						<ReactDisqusThread
-							shortname="jitstube" 
-						/>
-						{/*this.props.match.params.id in videosInDatabase ? 
-							<ReactDisqusThread
-								shortname="jitstube"
-								identifier={this.props.match.params.id}
-								title={title}
-								url={this.props.match.url}
-								category_id="videos"
-								onNewComment={this.handleNewComment} /> : 
-							null*/}
-
 					</div>
-					<div className="col-md-4" style={{backgroundColor: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,.1)', paddingTop: '10px', paddingRight: '10px'}}>
+					<div className="col-md-4 container-box" style={{paddingTop: '10px', paddingRight: '10px'}}>
 						<h2>Related Videos</h2>
 						<VideoList caller='WatchScreen' videosToRender={this.props.relatedVideos} />
 					</div>

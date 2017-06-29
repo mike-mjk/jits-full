@@ -65,6 +65,7 @@ class VideoList extends React.Component {
 							userid={video.addedBy}
 							addedBy={video.addedBy ? `${displayName}` : ''}
 							likes={((caller === 'HomeList') & (video.likes || video.likes === 0)) ? `Likes: ${video.likes}` : ''}
+							caller={caller}
 						/>
 					</div>
 				)

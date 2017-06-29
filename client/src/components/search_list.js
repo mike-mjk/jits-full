@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class SearchList extends React.Component {
 	render() {
 		return (
-			<div className="container" style={{backgroundColor: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,.1)', padding: '15px'}}>
+			<div className="container container-box" style={{padding: '15px'}}>
 				<VideoList caller='SearchList' videosToRender={this.props.videosInSearchResults} />
 			</div>
 		)

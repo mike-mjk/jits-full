@@ -2,15 +2,15 @@ body {
     background-color: #F1F1F1;
 }
 
+.container-box {
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
 .thumb-and-text:first-child {
   padding-left: 15px !important;
   color: red
 }
 
-.video-info-box {
-    background: #fff;
-    box-shadow: 0 1px 2px rgba(0,0,0,.1);
-}
 
 .width-100 {
     width: 100%;
