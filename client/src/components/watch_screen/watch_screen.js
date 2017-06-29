@@ -4,7 +4,6 @@ import VideoList from '../video_list/video_list';
 import VideoInfoBox from './video_info_box';
 import { connect } from 'react-redux';
 import { fetchVideos, getRelatedVideos } from '../../actions';
-import ReactDisqusThread from 'react-disqus-thread';
 import Disqus from '../disqus/disqus';
 
 class WatchScreen extends React.Component {

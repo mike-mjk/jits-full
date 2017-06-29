@@ -2,7 +2,6 @@ import axios from 'axios';
 import _ from 'lodash';
 import config from '../api_key';
 import { extractFromResponse } from '../app_stuff';
-import { getDisplayName } from '../app_stuff';
 import { getUsername } from '../app_stuff';
 //attempting to navigate to /search 
 // import { browserHistory } from 'react-router';
@@ -63,7 +62,7 @@ export function fetchVideos() {
 	};
 }
 
-//This is wrong I think -- What is that get request doing???
+//This is wrong I think -- What is that get request doing??? devquestion
 export function fetchVideo(id) {
 	const request = axios.get(`/videos/${id}`);
 	console.log('request in fetchVideo', request);
@@ -175,3 +174,28 @@ export function addVideoToDatabase(videoId, category) {
 	}
 	
 }
+
+export function getVideoInfo(id) {
+	var URL = 'https://www.googleapis.com/youtube/v3/videos';
+	var query = {
+		params: {
+			id: id,
+			part: 'snippet',
+			r: 'json',
+			key: config.key
+		}
+	};
+	axios.get(URL, query)
+	.then(response => {
+		//'result.id' is a string that gets used because I use extractFromResponse for searching as well as adding
+		//and the Youtube API is slightly different
+		var video = extractFromResponse(response, 'result.id')
+	});
+}
+
+
+
+
+
+
+

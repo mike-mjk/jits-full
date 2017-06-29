@@ -4,7 +4,9 @@ import LikeButton from './like_button';
 
 
 const VideoInfoBox = (props) => {
-	console.log('props.idInDatabase', props.idInDatabase);
+	const description = <div className="container-box" style={{marginTop: '15px', padding: '12px'}}>
+				{props.description}
+			</div>
 	return (
 		<div>
 			<div className="container-box">
@@ -20,9 +22,9 @@ const VideoInfoBox = (props) => {
 					<AddToCategory id={props.id} />
 				}
 			</div>
-			<div className="container-box" style={{marginTop: '15px', padding: '12px'}}>
-				{props.description}
-			</div>
+
+			{props.description ? description : null}
+
 		</div>
 	)
 }

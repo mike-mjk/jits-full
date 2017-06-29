@@ -4,7 +4,6 @@ import VideoText from './video_text';
 import _ from 'lodash';
 import { rules } from './video_list_css';
 import { getUsernameDisplayNameObj } from '../../app_stuff';
-import { Link } from 'react-router-dom';
 
 class VideoList extends React.Component {
 	constructor(props) {

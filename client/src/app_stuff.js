@@ -2,7 +2,6 @@
       //They are slightly different so I pass in id path by hand as the third arg.
 import axios from 'axios';
 export function extractFromResponse(response, idPath) {
-	console.log('idPath', idPath);
 	var videos = response.data.items.map(result => {
 		return ({
 			title: result.snippet.title,
