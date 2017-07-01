@@ -51,10 +51,12 @@ app.get('/api/addtoliked', requireAuth, function(req, res) {
     .then(video => {
         User.findOne({ username: req.user.username })
         .then(user => {
+            console.log('user before', user);
             video = _.mapKeys(video, 'id');
             delete video[req.query.id]._id;
             user.likedVideos[req.query.id] = video[req.query.id]
             user.markModified('likedVideos');
+            console.log('user after', user)
             user.save();
             res.json('video was liked');
         })

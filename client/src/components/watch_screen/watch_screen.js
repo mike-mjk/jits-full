@@ -11,59 +11,62 @@ class WatchScreen extends React.Component {
 		super(props);
 
 		this.state={
-			id: this.props.match.params.id
+			id: this.props.match.params.id,
+			video: { 
+				title: null,
+				channelTitle: null,
+				description: null,
+				addedBy: null
+			}
 		}
 	}
 
-	//ReactDisqusThread code
-  handleNewComment(comment) {
-      console.log(comment.text);
-  }
-
-	// componentWillReceiveProps(nextProps) {
-	// 	const idInDatabase = Boolean(this.props.videosInDatabase[nextProps.match.params.id]);
-	// 	this.setState({
-	// 		idInDatabase: idInDatabase,
-	// 		id: nextProps.match.params.id,
-	// 	});
-	// }
 	componentDidMount() {
-		console.log('this.props', this.props);
 		//Make sure state is populated with videos in database
 		this.props.fetchVideos();
 		//Get related videos
-		this.props.getRelatedVideos(this.props.match.params.id);
-		// const idInDatabase = Boolean(this.props.videosInDatabase[this.props.match.params.id]);
-		// this.setState({
-		// 	idInDatabase: idInDatabase
-		// })
-	}
-	componentWillReceiveProps() {
-		console.log('component will receive');
+		this.props.getRelatedVideos(this.state.id);
+
 	}
 
 	componentDidUpdate() {
 		console.log('componentDidUpdate ran');
+		const { id } = this.state;
+		const { videosInDatabase } = this.props;
+		if (this.state.id in videosInDatabase) {
+			this.setState({
+				video: {
+					title: videosInDatabase[id].title,
+					channelTitle: videosInDatabase[id].channelTitle,
+					description: videosInDatabase[id].description,
+					addedBy: videosInDatabase[id].addedBy
+
+				}
+			});
+		}
+
 	}
 	//this code should probably be changed to have the title be from the state, but it works
 	//so i'm keeping it for now devquestion
 	render() {
 		//get id from url
 		// const { id } = this.props.match.params;
+		
 		const { videosInDatabase } = this.props;
-		console.log('videosInDatabase', videosInDatabase);
-		console.log('this.props.match.params.id', this.props.match.params.id)
-		let title = '';
-		let channelTitle = '';
-		let description = '';
-		if (this.props.match.params.id in videosInDatabase) { //videosInDatabase[this.props.match.params.id]
-			title = videosInDatabase[this.props.match.params.id].title;
-			channelTitle = videosInDatabase[this.props.match.params.id].channelTitle;
-			if (videosInDatabase[this.props.match.params.id].description) {
-				description = videosInDatabase[this.props.match.params.id].description;
-			}
-		}
+		// console.log('videosInDatabase', videosInDatabase);
+		// console.log('this.props.match.params.id', this.props.match.params.id)
+		// let title = '';
+		// let channelTitle = '';
+		// let description = '';
+		// if (this.props.match.params.id in videosInDatabase) { //videosInDatabase[this.props.match.params.id]
+		// 	title = videosInDatabase[this.props.match.params.id].title;
+		// 	channelTitle = videosInDatabase[this.props.match.params.id].channelTitle;
+		// 	if (videosInDatabase[this.props.match.params.id].description) {
+		// 		description = videosInDatabase[this.props.match.params.id].description;
+		// 	}
+		// }
 
+//id below can be this.state.id probably test later devquestion idInDatabase could be turned into state
 		return (
 			<div className="container">
 		    <div className="row">
@@ -71,10 +74,10 @@ class WatchScreen extends React.Component {
 						<YoutubePlayer id={this.props.match.params.id} />
 						<VideoInfoBox 
 							id={this.props.match.params.id}
-							title={title}
-							channelTitle={channelTitle}
+							title={this.state.video.title}
+							channelTitle={this.state.video.channelTitle}
 							idInDatabase={this.props.match.params.id in videosInDatabase}
-							description={description}
+							description={this.state.video.description}
 						/>
 						<Disqus />
 					</div>
