@@ -49,17 +49,40 @@ app.get('/api/islikedbyme', requireAuth, function(req, res) {
 app.get('/api/addtoliked', requireAuth, function(req, res) {
     Video.findOne({ id: req.query.id })
     .then(video => {
-        User.findOne({ username: req.user.username })
-        .then(user => {
-            console.log('user before', user);
-            video = _.mapKeys(video, 'id');
-            delete video[req.query.id]._id;
-            user.likedVideos[req.query.id] = video[req.query.id]
-            user.markModified('likedVideos');
-            console.log('user after', user)
-            user.save();
-            res.json('video was liked');
-        })
+        
+        User.update(
+            {username: req.user.username },
+            {$set: {displayName: 'd mike'}}, 
+            function(err, result) {
+                if (err) {
+                    console.log('err');
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err, req, res)
+                    });
+                }
+            }
+        );
+        // User.findOne({ username: req.user.username })
+        // .then(user => {
+
+        //     video = _.mapKeys(video, 'id');
+        //     delete video[req.query.id]._id;
+        //     user.likedVideos[req.query.id] = video[req.query.id]
+        //     // console.log('user.likedVideos', user.likedVideos);
+
+        //     console.log('updated', updated);
+        //     user.update({ likedVideos: }, function(err, result) {
+        //         if (err) {
+        //             console.log('err');
+        //             return res.status(400).send({
+        //                 message: errorHandler.getErrorMessage(err, req, res)
+        //             });
+        //         }
+        //     })
+        //     // user.markModified('likedVideos');
+        //     // user.save();
+        //     res.json('video was liked');
+        // })
     });
 });
 
