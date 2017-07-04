@@ -38,71 +38,45 @@ app.get('/api/getuser', function(req, res) {
 //like related routes
 app.get('/api/islikedbyme', requireAuth, function(req, res) {
     User.findOne({ username: req.user.username })
-        .then((user) => {
-            const isLiked = (req.query.id in user.likedVideos);   
-            res.json(isLiked);
-        });
+    .populate('likedVideos')
+    .then(user => {
+        let likedVideos = _.mapKeys(user.likedVideos, 'id')
+        const isLiked = (req.query.id in likedVideos);   
+        res.json(isLiked);
+    });
 
 });
+
 //devquestion run find video and find user simultaneously??
-//devquestion the "lodashed video" has an undefined: true key value pair
 app.get('/api/addtoliked', requireAuth, function(req, res) {
     Video.findOne({ id: req.query.id })
     .then(video => {
-        //
-        User.update(
-            {username: req.user.username },
-            {$set: {displayName: 'd mike'}}, 
-            function(err, result) {
-                if (err) {
-                    console.log('err');
-                    return res.status(400).send({
-                        message: errorHandler.getErrorMessage(err, req, res)
-                    });
-                }
-            }
-        );
-        // User.findOne({ username: req.user.username })
-        // .then(user => {
-
-        //     video = _.mapKeys(video, 'id');
-        //     delete video[req.query.id]._id;
-        //     user.likedVideos[req.query.id] = video[req.query.id]
-        //     // console.log('user.likedVideos', user.likedVideos);
-
-        //     console.log('updated', updated);
-        //     user.update({ likedVideos: }, function(err, result) {
-        //         if (err) {
-        //             console.log('err');
-        //             return res.status(400).send({
-        //                 message: errorHandler.getErrorMessage(err, req, res)
-        //             });
-        //         }
-        //     })
-        //     // user.markModified('likedVideos');
-        //     // user.save();
-        //     res.json('video was liked');
-        // })
+        User.findOne({ username: req.user.username })
+        .then(user => {
+            user.likedVideos.push(video);
+            user.save();
+            res.json('video was liked');
+        })
     });
 });
 
 
-
+//this is pretty ineficient devquestion
 app.get('/api/removefromliked', requireAuth, function(req, res) {
-    Video.findOne({ id: req.query.id })
-        .then(video => {
-            User.findOne({ username: req.user.username })
-                .then(user => {
-                    // video = _.mapKeys(video, 'id');
-                    // delete video[req.query.id]._id;
-                    delete user.likedVideos[req.query.id]
-                    console.log('user', user);
-                    // user.likedVideos[req.query.id] = video[req.query.id]
-                    user.markModified('likedVideos');
-                    user.save();
-                    res.json('video was removed from liked videos');
-                })
-        });
+    User.findOne({ username: req.user.username })
+    .populate('likedVideos')
+    .then(user => {
+        let index = null;
+        for (let i = 0; i < user.likedVideos.length; i++) {
+            if (user.likedVideos[i].id === req.query.id) {
+                index = i;
+            }
+        }
+        user.likedVideos.splice(index, 1);
+        user.save();
+        res.json('video was removed from liked videos');
+    })
+
 });
 
 
