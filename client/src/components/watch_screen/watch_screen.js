@@ -53,6 +53,7 @@ class WatchScreen extends React.Component {
 							idInDatabase={this.props.match.params.id in videosInDatabase} //Boolean(this.props.videosInDatabase[this.props.match.params.id])
 						/>
 						<Disqus
+							key={this.props.match.params.id}
 							identifier={this.props.match.params.id}
 							url={this.props.match.url}
 						/>
