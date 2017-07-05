@@ -18,7 +18,9 @@ class Disqus extends React.Component {
 
 	render() {
 		return (
-			<div id="disqus_thread" style={{marginTop: '30px'}}></div>
+			<div>
+				{this.props.idInDatabase && <div id="disqus_thread" style={{marginTop: '30px'}}></div>}
+			</div>
 		)
 	}
 }
