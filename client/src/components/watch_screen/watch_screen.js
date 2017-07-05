@@ -65,7 +65,7 @@ class WatchScreen extends React.Component {
 			<div className="container">
 		    <div className="row">
 					<div className="col-md-8">
-						<YoutubePlayer id={this.props.match.params.id} />
+						<YoutubePlayer id={this.props.match.params.id} key={this.props.match.params.id} />
 						<VideoInfoBox 
 							id={this.props.match.params.id}
 							title={title}
