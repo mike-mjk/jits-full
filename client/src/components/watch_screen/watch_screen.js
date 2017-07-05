@@ -4,7 +4,6 @@ import VideoList from '../video_list/video_list';
 import VideoInfoBox from './video_info_box';
 import { connect } from 'react-redux';
 import { fetchVideos, getRelatedVideos } from '../../actions';
-import ReactDisqusThread from 'react-disqus-thread';
 import Disqus from '../disqus/disqus';
 
 class WatchScreen extends React.Component {
@@ -16,18 +15,6 @@ class WatchScreen extends React.Component {
 		}
 	}
 
-	//ReactDisqusThread code
-  handleNewComment(comment) {
-      console.log(comment.text);
-  }
-
-	// componentWillReceiveProps(nextProps) {
-	// 	const idInDatabase = Boolean(this.props.videosInDatabase[nextProps.match.params.id]);
-	// 	this.setState({
-	// 		idInDatabase: idInDatabase,
-	// 		id: nextProps.match.params.id,
-	// 	});
-	// }
 	componentDidMount() {
 		console.log('this.props', this.props);
 		//Make sure state is populated with videos in database
@@ -38,13 +25,6 @@ class WatchScreen extends React.Component {
 		// this.setState({
 		// 	idInDatabase: idInDatabase
 		// })
-	}
-	componentWillReceiveProps() {
-		console.log('component will receive');
-	}
-
-	componentDidUpdate() {
-		console.log('componentDidUpdate ran');
 	}
 	//this code should probably be changed to have the title be from the state, but it works
 	//so i'm keeping it for now devquestion
@@ -72,27 +52,10 @@ class WatchScreen extends React.Component {
 							channelTitle={channelTitle}
 							idInDatabase={this.props.match.params.id in videosInDatabase} //Boolean(this.props.videosInDatabase[this.props.match.params.id])
 						/>
-						
-
-
-						<Disqus />
-
-
-
-
-						<ReactDisqusThread
-							shortname="jitstube" 
+						<Disqus
+							identifier={this.props.match.params.id}
+							url={this.props.match.url}
 						/>
-						{/*this.props.match.params.id in videosInDatabase ? 
-							<ReactDisqusThread
-								shortname="jitstube"
-								identifier={this.props.match.params.id}
-								title={title}
-								url={this.props.match.url}
-								category_id="videos"
-								onNewComment={this.handleNewComment} /> : 
-							null*/}
-
 					</div>
 					<div className="col-md-4" style={{backgroundColor: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,.1)', paddingTop: '10px', paddingRight: '10px'}}>
 						<h2>Related Videos</h2>
