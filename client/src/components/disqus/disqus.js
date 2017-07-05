@@ -3,8 +3,10 @@ import React from 'react';
 class Disqus extends React.Component {
 
 	disqus_config() {
-		this.page.url = "http://jits-app.herokuapp.com"
-		this.page.identifier = "fakeIdentifier"
+		// this.page.url = "http://jits-app.herokuapp.com"
+		// this.page.identifier = "fakeIdentifier"
+		this.page.url = this.props.url;
+		this.page.identifier = this.props.identifier;
 	}
 
 	componentDidMount() {

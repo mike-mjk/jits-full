@@ -36,7 +36,7 @@ exports.signup = function(req, res, next) {
 			displayName: displayName,
 			//devquestion had to add the starter entry so that addtoliked server
 			//route would work. Is there a better way?
-			likedVideos: { starterEntry: 'so obj is defined'}
+			likedVideos: []
 		});
 
 		user.save(function(err) {

@@ -27,10 +27,11 @@ class UserProfile extends React.Component {
 		getUser(this.props.match.params.userid)
 		.then(user => {
 			//remove the starter entry that is only in there because I was getting "undefined" errors with an empty object
-			const videos = _.pickBy(user.likedVideos, function(value, key) {
-				console.log('value', value);
-				return user.likedVideos[key] !== 'so obj is defined';
-			});
+			// const videos = _.pickBy(user.likedVideos, function(value, key) {
+				// console.log('value', value);
+				// return user.likedVideos[key] !== 'so obj is defined';
+			// });
+			let videos = _.mapKeys(user.likedVideos, 'id');
 			this.setState({ videosLikedByUser: videos });
 		});
 	}
