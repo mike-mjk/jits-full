@@ -31,13 +31,18 @@ class AddToCategory extends React.Component {
 
 
 	onSubmit(values) {
-		authCheck().then(data => {
-			if (data === 'logged in') {
-				this.props.addVideoToDatabase(this.props.id, values.category)
-			}
-		}).catch(data => {
-			alert('You must be logged in to add videos');
-		});
+		if (values.category !== undefined) {
+			authCheck().then(data => {
+				if (data === 'logged in') {
+					this.props.addVideoToDatabase(this.props.id, values.category)
+				}
+			}).catch(data => {
+				alert('You must be logged in to add videos');
+			});
+		}
+		else {
+			alert('You must select a category');
+		}
 		// console.log('values.category',values.category);
 
 	}

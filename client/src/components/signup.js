@@ -58,6 +58,14 @@ class Signup extends React.Component {
 					name="displayName"
 					component={this.renderField}
 				/>
+
+				<Field
+					label="Invitation Code"
+					type="text"
+					name="invitationCode"
+					component={this.renderField}
+				/>
+
 				<Field
 					label="Password"
 					type="password"
@@ -79,6 +87,9 @@ class Signup extends React.Component {
 
 function validate(values) {
 	const errors = {};
+	if (values.invitationCode !== '10pfreaks') {
+		errors.invitationCode = "Invitation code is not correct."
+	}
 	if (values.username) {
 		// console.log('values.username', values.username);
 		if (values.username.length < 4) {
@@ -90,8 +101,8 @@ function validate(values) {
 	}
 	//putting password length min as 3 for dev purposes. will increase later
 	if (values.password) {
-		if (values.password.length < 3) {
-			errors.password = "Password must be at least 3 characters";
+		if (values.password.length < 6) {
+			errors.password = "Password must be at least 6 characters";
 		}
 	}
 

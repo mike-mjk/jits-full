@@ -144,35 +144,31 @@ export function addVideoToDatabase(videoId, category) {
 			}
 		};
 		axios.get(URL, query)
-			.then(response => {
-				//'result.id' is a string that gets used because I use extractFromResponse for searching as well as adding
-				//and the Youtube API is slightly different
-				var video = extractFromResponse(response, 'result.id')
-				video[0].category = category;
-				
-				getUsername()
-				.then((name) => {
-					video[0].addedBy = name;
+		.then(response => {
+			//'result.id' is a string that gets used because I use extractFromResponse for searching as well as adding
+			//and the Youtube API is slightly different
+			var video = extractFromResponse(response, 'result.id')
+			video[0].category = category;
+			
+			getUsername()
+			.then((name) => {
+				video[0].addedBy = name;
 
-					axios.post('/api/videos', video[0])
-					.then(() => {
-						axios.get('/api/videos')
-						.then((data) => {
-							//console.log('data', data)
-							
-							dispatch({
-								type: FETCH_VIDEOS,
-								payload: data
-							}) 
-
-						})
-
-					});
-				})
-
+				axios.post('/api/videos', video[0])
+				.then(() => {
+					axios.get('/api/videos')
+					.then((data) => {
+						//console.log('data', data)
+						
+						dispatch({
+							type: FETCH_VIDEOS,
+							payload: data
+						}) 
+					})
+				});
 			})
+		})
 	}
-	
 }
 
 export function getVideoInfo(id) {
