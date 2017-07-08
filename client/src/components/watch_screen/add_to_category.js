@@ -9,26 +9,28 @@ import { connect } from 'react-redux';
 class AddToCategory extends React.Component {
 	renderField(field) {
 		return (
-			<input type={field.type}{...field.input}  name={field.input.name} value={field.input.value}/>
+			<input id={field.id} type={field.type}{...field.input}  name={field.input.name} value={field.input.value}/>
 		)
 	}
 
 	renderCategories() {
 		return categories.map( (category) => {
 			return (
-				<label key={category}>
+				<div>
 					<Field 
+						id={category}
 						name="category" 
 						component={this.renderField} 
 						type="radio" 
 						value={category}
 					/>
-					{category}
-				</label>
+					<label htmlFor={category} key={category}>
+						{category}
+					</label>
+				</div>
 			)
 		})
 	}
-
 
 	onSubmit(values) {
 		if (values.category !== undefined) {
@@ -51,7 +53,8 @@ class AddToCategory extends React.Component {
 		const { handleSubmit } = this.props;
 		return (
 			<div>
-				<form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
+				<h3>Add this video to a category</h3>
+				<form className='category-form' onSubmit={handleSubmit(this.onSubmit.bind(this))} >
 					{this.renderCategories()}
 					<button type="submit">Add Video</button>
 				</form>
