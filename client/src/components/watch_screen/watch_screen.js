@@ -65,7 +65,15 @@ class WatchScreen extends React.Component {
 					</div>
 					<div className="col-md-4" style={{backgroundColor: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,.1)', paddingTop: '10px', paddingRight: '10px'}}>
 						<h2>Related Videos</h2>
-						<VideoList caller='WatchScreen' videosToRender={this.props.relatedVideos} />
+						<VideoList
+							columns=''
+							video=''
+							watchScreenPadding='watch-screen-padding'
+							watchScreenCol5='col-xs-5'
+							watchScreenCol7='col-xs-7'
+							caller='WatchScreen'
+							videosToRender={this.props.relatedVideos}
+						/>
 					</div>
 				</div>
 			</div>

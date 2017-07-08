@@ -6,7 +6,11 @@ class SearchList extends React.Component {
 	render() {
 		return (
 			<div className="container container-box" style={{padding: '15px'}}>
-				<VideoList caller='SearchList' videosToRender={this.props.videosInSearchResults} />
+				<VideoList
+					columns = 'col-md-3'
+					video='big-video'
+					caller='SearchList' 
+					videosToRender={this.props.videosInSearchResults} />
 			</div>
 		)
 	}

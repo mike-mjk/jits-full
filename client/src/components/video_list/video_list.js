@@ -2,7 +2,7 @@ import React from 'react';
 import Thumbnail from './thumbnail';
 import VideoText from './video_text';
 import _ from 'lodash';
-import { rules } from './video_list_css';
+import './video_list_css.css';
 import { getUsernameDisplayNameObj } from '../../app_stuff';
 
 class VideoList extends React.Component {
@@ -32,32 +32,31 @@ class VideoList extends React.Component {
 		}
 
 		const { caller } = this.props;
-		let style = {};
-		if( caller === 'HomeList') {
-			style = rules.homeList;
-		}
-		if( caller === 'WatchScreen') {
-			style = rules.watchScreen;
-		}
+		// let style = {};
+		// // if( caller === 'HomeList') {
+		// // 	style = rules.homeList;
+		// // }
+		// // if( caller === 'WatchScreen') {
+		// // 	style = rules.watchScreen;
+		// // }
 
-		if(caller === 'SearchList') {
-			style = rules.searchList;
-		}
+		// // if(caller === 'SearchList') {
+		// // 	style = rules.searchList;
+		// // }
 
 		// let myVar = getUsernameDisplayNameObj();
 		// console.log('myVar', myVar);
 		
 
-		console.log('usernameDisplayNameObj state', this.state.usernameDisplayNameObj);
 		return (
 			_.map(videosToRender, (video) => {
 				const displayName = this.state.usernameDisplayNameObj[video.addedBy];
 				return (
-					<div style={style.video} className={style.columns} key={video.id}>
-						<Thumbnail className={(caller === 'WatchScreen') ? style.col5 : ''} videoUrl={`/watch/${video.id}`} thumbnailUrl={video.thumbnail} />
+					<div className={`${this.props.columns} ${this.props.video}`} key={video.id}>
+						<Thumbnail className={this.props.watchScreenCol5} videoUrl={`/watch/${video.id}`} thumbnailUrl={video.thumbnail} />
 						<VideoText
-							style={(caller === 'WatchScreen') ? {padding: '0px'} : {}}
-							className={style.col7}
+							className={this.props.watchScreenCol7}
+							watchScreenPadding={this.props.watchScreenPadding}
 							videoUrl={`/watch/${video.id}`}
 							videoTitle={video.title}
 							channelTitle={video.channelTitle}
@@ -76,11 +75,11 @@ class VideoList extends React.Component {
 	render() {
 		const { caller } = this.props;
 		let style = {};
-		if( caller === 'HomeList') {
-			style = rules.homeList
-		}
+		// if( caller === 'HomeList') {
+		// 	style = rules.homeList
+		// }
 
-		return <div className="row" style={(caller === 'HomeList') ? style.row : {}} >{this.renderVideos()}</div>
+		return <div className={`${this.props.category} row`}>{this.renderVideos()}</div>
 	}
 }
 

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { fetchVideos } from '../actions';
 import { categories } from '../app_stuff';
 import _ from 'lodash';
-// import { rules } from './video_list/video_list_css';
+
+
 
 
 class HomeList extends React.Component {
@@ -22,7 +23,14 @@ class HomeList extends React.Component {
 				return (
 					<div>
 						<h1>{category}</h1>
-						<VideoList header='blueheader' caller='HomeList' videosToRender={this.objByCategory(category)} />
+						<VideoList
+							watchScreenCol5=''
+							watchScreenCol7=''
+							video='big-video'
+							columns='col-md-3'
+							caller='HomeList'
+							category='category'
+							videosToRender={this.objByCategory(category)} />
 					</div>
 				)
 			})
