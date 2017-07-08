@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 import { fetchVideos } from '../actions';
 import { categories } from '../app_stuff';
 import _ from 'lodash';
+import { Button, Collapse } from 'react-bootstrap';
 
 
 
 
 class HomeList extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = { Competition: true };
+	}
 	componentDidMount() {
 		this.props.fetchVideos();
 	}
@@ -20,17 +26,28 @@ class HomeList extends React.Component {
 	makeListWithCategoryJsx() {
 		return (
 			categories.map(category => {
+				let open = category;
 				return (
 					<div>
-						<h1>{category}</h1>
-						<VideoList
-							watchScreenCol5=''
-							watchScreenCol7=''
-							video='big-video'
-							columns='col-md-3'
-							caller='HomeList'
-							category='category'
-							videosToRender={this.objByCategory(category)} />
+						<Button
+							style={{fontSize: '250%', margin: '5px 0'}}
+							className={this.state[open] ? 'fa fa-chevron-up' : 'fa fa-chevron-down'} 
+							onClick={ ()=> this.setState({ [open]: !this.state[open] })}>
+							{category}
+						</Button>
+						<Collapse in={this.state[open]}>
+							<div>
+								<VideoList
+									watchScreenCol5=''
+									watchScreenCol7=''
+									video='big-video'
+									columns='col-md-3'
+									caller='HomeList'
+									category='category'
+									videosToRender={this.objByCategory(category)}
+								/>
+							</div>
+						</Collapse>
 					</div>
 				)
 			})
