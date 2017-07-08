@@ -11,6 +11,10 @@ body {
     margin-bottom: 15px;
 }
 
+.search-button {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
 /*.thumb-and-text:first-child {
   padding-left: 15px !important;
   color: red

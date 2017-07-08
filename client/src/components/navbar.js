@@ -37,7 +37,7 @@ class Search extends React.Component {
         </div>
         
         <div className="form-group">
-          <button type="submit" className="btn btn-default">Search</button>
+          <button type="submit" className="btn btn-default search-button">Search</button>
         </div>
 
       </form>
