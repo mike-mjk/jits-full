@@ -4,6 +4,8 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import UserWelcome from './user_welcome';
+import { Navbar } from 'react-bootstrap';
+
 
 class Search extends React.Component {
   constructor(props) {
@@ -48,7 +50,7 @@ class Search extends React.Component {
 
 const SearchWithRouter = withRouter(Search);
 
-class NavBar extends React.Component {
+class AppNavBar extends React.Component {
 
   //Building sign in and sign up links
   renderAccountLinks() {
@@ -74,21 +76,23 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <nav className='navbar navbar-default'>
+
+      <Navbar>
         <div className='container'>
           
           <div className="navbar-header">
             <a href="/index.html" className="navbar-brand">Jiu-Jitsu Tube</a>
+            <Navbar.Toggle />
           </div>
 
-          <SearchWithRouter searchYoutube={this.props.searchYoutube} />
-
-          <ul className="nav navbar-nav">
-            {this.renderAccountLinks()}
-          </ul>
-          
+          <Navbar.Collapse>
+            <SearchWithRouter searchYoutube={this.props.searchYoutube} />
+            <ul className="nav navbar-nav">
+              {this.renderAccountLinks()}
+            </ul>
+          </Navbar.Collapse>
         </div>
-      </nav>
+      </Navbar>
     )   
   }
   
@@ -100,4 +104,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { searchYoutube })(NavBar); 
+export default connect(mapStateToProps, { searchYoutube })(AppNavBar); 

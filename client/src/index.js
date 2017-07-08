@@ -13,7 +13,7 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 import reducers from './reducers';
-import NavBar from './components/navbar';
+import AppNavBar from './components/navbar';
 // import Video from './components/video';
 // import VideoWatch from './components/watch'
 // import SideBar from './components/sidebar'
@@ -43,7 +43,7 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <Route path="/" component={NavBar} />
+        <Route path="/" component={AppNavBar} />
         <Switch>
         	<Route path="/watch/:id" component={WatchScreen} />
           <Route path="/profile/:userid" component={UserProfile} />
