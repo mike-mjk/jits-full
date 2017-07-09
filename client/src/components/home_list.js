@@ -30,7 +30,7 @@ class HomeList extends React.Component {
 				return (
 					<div>
 						<Button
-							style={{fontSize: '250%', margin: '5px 0'}}
+							style={{fontSize: '150%', margin: '10px 0'}}
 							className={this.state[open] ? 'fa fa-chevron-up' : 'fa fa-chevron-down'} 
 							onClick={ ()=> this.setState({ [open]: !this.state[open] })}>
 							{category}

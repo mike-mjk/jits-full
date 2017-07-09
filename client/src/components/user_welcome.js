@@ -23,7 +23,7 @@ class UserWelcome extends React.Component {
 	}
 
 	render() {
-		return <li className="navbar-text">Welcome, <Link to={`/profile/${this.state.username}`}>{this.state.displayName}!</Link> </li>
+		return <li className="navbar-text">Welcome, <Link style={{display: 'inline', padding: '0'}}to={`/profile/${this.state.username}`}>{this.state.displayName}!</Link> </li>
 	}
 }
 
