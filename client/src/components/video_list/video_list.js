@@ -1,6 +1,7 @@
 import React from 'react';
 import Thumbnail from './thumbnail';
 import VideoText from './video_text';
+import { VideoTextSideBar } from './video_text';
 import _ from 'lodash';
 import './video_list_css.css';
 import { getUsernameDisplayNameObj } from '../../app_stuff';
@@ -32,21 +33,6 @@ class VideoList extends React.Component {
 		}
 
 		const { caller } = this.props;
-		// let style = {};
-		// // if( caller === 'HomeList') {
-		// // 	style = rules.homeList;
-		// // }
-		// // if( caller === 'WatchScreen') {
-		// // 	style = rules.watchScreen;
-		// // }
-
-		// // if(caller === 'SearchList') {
-		// // 	style = rules.searchList;
-		// // }
-
-		// let myVar = getUsernameDisplayNameObj();
-		// console.log('myVar', myVar);
-		
 
 		return (
 			_.map(videosToRender, (video) => {
@@ -75,9 +61,6 @@ class VideoList extends React.Component {
 	render() {
 		const { caller } = this.props;
 		let style = {};
-		// if( caller === 'HomeList') {
-		// 	style = rules.homeList
-		// }
 
 		return <div className={`${this.props.category} row`}>{this.renderVideos()}</div>
 	}
@@ -86,24 +69,60 @@ class VideoList extends React.Component {
 export default VideoList;
 
 
-	// 	return (
-	// 		_.map(videosToRender, (video) => {
-	// 			const displayName = 
-	// 			return (
-	// 				<div style={style.video} className={style.columns} key={video.id}>
-	// 					<Thumbnail className={(caller === 'WatchScreen') ? style.col5 : ''} videoUrl={`/watch/${video.id}`} thumbnailUrl={video.thumbnail} />
-	// 					<VideoText
-	// 						style={(caller === 'WatchScreen') ? {padding: '0px'} : {}}
-	// 						className={style.col7}
-	// 						videoUrl={`/watch/${video.id}`}
-	// 						videoTitle={video.title}
-	// 						channelTitle={video.channelTitle}
-	// 						addedBy={video.addedBy ? `Added By: ${this.state.usernameDisplayNameObj[video.addedBy]}` : ''}
-	// 						likes={((caller === 'HomeList') & (video.likes || video.likes === 0)) ? `Likes: ${video.likes}` : ''}
-	// 					/>
-	// 				</div>
-	// 			)
-	// 		})
-	// 	);
-	// }
+export class VideoListSideBar extends React.Component {
+	constructor(props) {
+		super(props);
 
+		this.state = {
+			usernameDisplayNameObj: {}
+		}
+	}
+
+	componentDidMount() {
+		getUsernameDisplayNameObj()
+		.then(users => {
+			this.setState({
+				usernameDisplayNameObj: users
+			})
+		})
+	}
+
+	renderVideos() {
+		const { videosToRender } = this.props;
+
+		//Existence check. Should always be there though.
+		if(!videosToRender) {
+			return <div>Loading</div>
+		}
+
+		const { caller } = this.props;
+
+		return (
+			_.map(videosToRender, (video) => {
+				const displayName = this.state.usernameDisplayNameObj[video.addedBy];
+				return (
+					<div className='row' style={{padding: '0px 15px 10px 15px'}}key={video.id}>
+						<Thumbnail className='col-xs-5' videoUrl={`/watch/${video.id}`} thumbnailUrl={video.thumbnail} />
+						<VideoTextSideBar
+							videoUrl={`/watch/${video.id}`}
+							videoTitle={video.title}
+							channelTitle={video.channelTitle}
+							userid={video.addedBy}
+							addedBy={video.addedBy ? `${displayName}` : ''}
+							likes={((caller === 'HomeList') & (video.likes || video.likes === 0)) ? `Likes: ${video.likes}` : ''}
+							caller={caller}
+						/>
+					</div>
+				)
+			})
+		);
+	}
+
+
+	render() {
+		const { caller } = this.props;
+		let style = {};
+
+		return <div className={`${this.props.category} row`}>{this.renderVideos()}</div>
+	}
+}
