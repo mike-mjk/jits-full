@@ -31,7 +31,6 @@ app.get('/api/getuser', function(req, res) {
     User.findOne({ username: req.query.id })
     .populate('likedVideos')
     .then(user => {
-        console.log(user);
         res.json(user);
     });
 });

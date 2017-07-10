@@ -38,7 +38,6 @@ class UserProfile extends React.Component {
 
 
 	render() {
-		console.log('videosInDatabase', JSON.stringify(this.props.videosInDatabase));
 		const { userid } = this.props.match.params;
 		const name = this.state.usernameDisplayNameObj[userid];
 		const allVideos = this.props.videosInDatabase;
@@ -56,6 +55,7 @@ class UserProfile extends React.Component {
 					watchScreenCol7=''
 					video='big-video'
 					columns='col-md-3'
+					category='category'
 				/>
 				<h2>Videos liked by {name}</h2>
 				<VideoList
@@ -65,6 +65,7 @@ class UserProfile extends React.Component {
 					watchScreenCol7=''
 					video='big-video'
 					columns='col-md-3'
+					category='category'
 				/>
 			</div>
 		)
