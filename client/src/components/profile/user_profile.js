@@ -49,9 +49,23 @@ class UserProfile extends React.Component {
 		return (
 			<div className="container container-box">
 				<h2>Videos added by {name}</h2>
-				<VideoList caller='HomeList' videosToRender={videosAddedByUser} />
+				<VideoList 
+					caller='HomeList'
+					videosToRender={videosAddedByUser}
+					watchScreenCol5=''
+					watchScreenCol7=''
+					video='big-video'
+					columns='col-md-3'
+				/>
 				<h2>Videos liked by {name}</h2>
-				<VideoList caller='HomeList' videosToRender={this.state.videosLikedByUser} />
+				<VideoList
+					caller='HomeList' 
+					videosToRender={this.state.videosLikedByUser} 
+					watchScreenCol5=''
+					watchScreenCol7=''
+					video='big-video'
+					columns='col-md-3'
+				/>
 			</div>
 		)
 	}
