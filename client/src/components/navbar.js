@@ -32,10 +32,10 @@ class Search extends React.Component {
       <form onSubmit={this.onFormSubmit} id="search-youtube-form" className="navbar-form navbar-left">
         
         <div className="form-group">
-          <input value={this.state.term}
+          <input style={{width: '240px'}}value={this.state.term}
           onChange={event => this.setState({term: event.target.value})}
           id="search-youtube-input" type="search" className="form-control"
-          placeholder="Search YouTube" />
+          placeholder="Search YouTube to add videos!" />
         </div>
         
         <div className="form-group">
