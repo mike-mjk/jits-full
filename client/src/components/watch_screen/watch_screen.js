@@ -50,13 +50,15 @@ class WatchScreen extends React.Component {
 			<div className="container">
 		    <div className="row">
 					<div className="col-md-8">
-						<YoutubePlayer id={this.props.match.params.id} key={this.props.match.params.id} />
-						<VideoInfoBox 
-							id={this.props.match.params.id}
-							title={title}
-							channelTitle={channelTitle}
-							idInDatabase={this.props.match.params.id in videosInDatabase} //Boolean(this.props.videosInDatabase[this.props.match.params.id])
-						/>
+						<div className="video-player">
+							<YoutubePlayer id={this.props.match.params.id} key={this.props.match.params.id} />
+							<VideoInfoBox 
+								id={this.props.match.params.id}
+								title={title}
+								channelTitle={channelTitle}
+								idInDatabase={this.props.match.params.id in videosInDatabase} //Boolean(this.props.videosInDatabase[this.props.match.params.id])
+							/>
+						</div>
 						<Disqus
 							idInDatabase={this.props.match.params.id in videosInDatabase}
 							key={'disqus' + this.props.match.params.id}

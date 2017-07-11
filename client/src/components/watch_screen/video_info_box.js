@@ -9,8 +9,8 @@ const VideoInfoBox = (props) => {
 			</div>
 	return (
 		<div>
-			<div className="container-box">
-				<h2>{props.title}</h2>
+			<div className="container-box" style={{padding: '15px'}}>
+				<h2 style={{margin: '0px', marginBottom: '5px'}}>{props.title}</h2>
 				<p>{props.channelTitle}</p>
 				{props.idInDatabase &&
 					<LikeButton id={props.id} />

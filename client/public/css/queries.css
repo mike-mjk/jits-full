@@ -1,0 +1,5 @@
+@media only screen and (max-width: 740px) {
+	.video-player {
+		margin: 0 -15px;
+	}
+}
