@@ -113,18 +113,18 @@ export function getRelatedVideos(videoId) {
 	  }}
 
 	  axios.get(URL, query)
-	  	.then(response => {
-	  		//Extract needed data from API response
-	  		var videos = extractFromResponse(response, 'result.id.videoId')
-				//Transform array of videos into object
-	  		videos = _.mapKeys(videos, 'id');
+  	.then(response => {
+  		//Extract needed data from API response
+  		var videos = extractFromResponse(response, 'result.id.videoId')
+			//Transform array of videos into object
+  		videos = _.mapKeys(videos, 'id');
 
-	  		dispatch(
-	  			{ type: GET_RELATED_VIDEOS,
-	  				payload: videos
-	  		  }
-	  		)
-	  	})
+  		dispatch(
+  			{ type: GET_RELATED_VIDEOS,
+  				payload: videos
+  		  }
+  		)
+  	})
 	}
 }
 

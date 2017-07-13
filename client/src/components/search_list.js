@@ -9,7 +9,8 @@ class SearchList extends React.Component {
 				<VideoList
 					columns = 'col-md-3'
 					video='big-video'
-					caller='SearchList' 
+					caller='SearchList'
+					category='category'
 					videosToRender={this.props.videosInSearchResults} />
 			</div>
 		)

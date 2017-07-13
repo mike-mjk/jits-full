@@ -17,6 +17,7 @@ class UserProfile extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchVideos();
+		window.scrollTo(0,0);
 
 		getUsernameDisplayNameObj()
 		.then(users => {
