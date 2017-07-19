@@ -3,10 +3,6 @@ import _ from 'lodash';
 import config from '../api_key';
 import { extractFromResponse } from '../app_stuff';
 import { getUsername } from '../app_stuff';
-//attempting to navigate to /search 
-// import { browserHistory } from 'react-router';
-
-// import { getSearchResults } from '../app.js';
 
 export const FETCH_VIDEOS = 'fetch_videos';
 export const FETCH_VIDEO = 'fetch_video';
@@ -62,7 +58,6 @@ export function fetchVideos() {
 	};
 }
 
-//This is wrong I think -- What is that get request doing??? devquestion
 export function fetchVideo(id) {
 	const request = axios.get(`/videos/${id}`);
 	console.log('request in fetchVideo', request);
@@ -131,7 +126,6 @@ export function getRelatedVideos(videoId) {
 //use id from url to make request to youtube api
 //extract relevent info, and add to the database
 
-//latest non working
 export function addVideoToDatabase(videoId, category) {
 	return function(dispatch) {
 	  var URL = 'https://www.googleapis.com/youtube/v3/videos';
